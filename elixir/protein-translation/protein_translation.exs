@@ -3,11 +3,18 @@ defmodule ProteinTranslation do
   Given an RNA string, return a list of proteins specified by codons, in order.
   """
   @spec of_rna(String.t()) :: {atom, list(String.t())}
+  def of_rna(""), do: {:ok, []}
   def of_rna(rna) do
-    Regex.split(~r/.../u, rna, include_captures: true, trim: true)
+    case of_codon(String.slice(rna, 0..2)) do
+      {:ok, "STOP"} -> {:ok, []}
+      {:ok, protein} ->
+        case of_rna(String.slice(rna, 3..-1)) do
+          {:ok, list} -> {:ok, [protein] ++ list}
+          _ -> {:error, "invalid RNA"}
+        end
+      _ -> {:error, "invalid RNA"}
+    end
   end
-
-  def of_rna()
 
   @doc """
   Given a codon, return the corresponding protein
