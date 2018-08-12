@@ -15,5 +15,18 @@ defmodule PigLatin do
   """
   @spec translate(phrase :: String.t()) :: String.t()
   def translate(phrase) do
+    phrase |> split |> translate_words |> join
+  end
+
+  defp split(phrase), do: String.split(phrase)
+
+  defp translate_words([]), do: []
+
+  defp translate_words([head | tail]), do:  [translate_word(head)] ++ translate_words(tail)
+
+  defp join(list), do: Enum.join(list, " ")
+
+  defp translate_word(word) do
+    Regex.replace(~r/^((s?qu|.*?))(([xy][^aeiuo]|[aeiuo])+)(.*?)$/u, word, "\\3\\5\\1ay")
   end
 end
