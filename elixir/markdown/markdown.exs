@@ -12,18 +12,14 @@ defmodule Markdown do
   """
   @spec parse(String.t()) :: String.t()
   def parse(m) do
-    patch(Enum.join(Enum.map(String.split(m, "\n"), fn t -> process(t) end)))
+    m |> String.split("\n") |> Enum.map(fn t -> process(t) end) |> Enum.join |> patch
   end
 
   defp process(t) do
-    if String.starts_with?(t, "#") || String.starts_with?(t, "*") do
-      if String.starts_with?(t, "#") do
-        enclose_with_header_tag(parse_header_md_level(t))
-      else
-        parse_list_md_level(t)
-      end
-    else
-      enclose_with_paragraph_tag(String.split(t))
+    cond do
+      String.starts_with?(t, "#") -> t |> parse_header_md_level |> enclose_with_header_tag
+      String.starts_with?(t, "*") -> t |> parse_list_md_level
+      true -> t |> String.split |> enclose_with_paragraph_tag
     end
   end
 
@@ -33,12 +29,12 @@ defmodule Markdown do
   end
 
   defp parse_list_md_level(l) do
-    t = String.split(String.trim_leading(l, "* "))
-    "<li>" <> join_words_with_tags(t) <> "</li>"
+    t = l |> String.trim_leading("* ") |> String.split
+    "<li>#{join_words_with_tags(t)}</li>"
   end
 
   defp enclose_with_header_tag({hl, htl}) do
-    "<h" <> hl <> ">" <> htl <> "</h" <> hl <> ">"
+    "<h#{hl}>#{htl}</h#{hl}>"
   end
 
   defp enclose_with_paragraph_tag(t) do
@@ -46,11 +42,11 @@ defmodule Markdown do
   end
 
   defp join_words_with_tags(t) do
-    Enum.join(Enum.map(t, fn w -> replace_md_with_tag(w) end), " ")
+    t |> Enum.map(fn w -> replace_md_with_tag(w) end) |> Enum.join(" ")
   end
 
   defp replace_md_with_tag(w) do
-    replace_suffix_md(replace_prefix_md(w))
+    w |> replace_prefix_md |> replace_suffix_md
   end
 
   defp replace_prefix_md(w) do
@@ -70,10 +66,6 @@ defmodule Markdown do
   end
 
   defp patch(l) do
-    String.replace_suffix(
-      String.replace(l, "<li>", "<ul>" <> "<li>", global: false),
-      "</li>",
-      "</li>" <> "</ul>"
-    )
+    l |> String.replace("<li>", "<ul><li>", global: false) |> String.replace_suffix("</li>", "</li></ul>")
   end
 end
