@@ -24,10 +24,6 @@ defmodule BinarySearch do
   end
 
   defp search({}, _, _, _), do: :not_found
-  defp search(_, _, first, _) when first < 0, do: :not_found
-  defp search(_, _, first, last) when first > last, do: :not_found
-  defp search(numbers, _, _, last) when last >= tuple_size(numbers), do: :not_found
-  defp search(numbers, key, first, _) when key < elem(numbers, first), do: :not_found
   defp search(numbers, key, _, last) when key > elem(numbers, last), do: :not_found
   defp search(numbers, key, first, last) do
     median_position = first + div(last - first, 2)
