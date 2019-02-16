@@ -32,7 +32,7 @@ defmodule RobotSimulator do
   def simulate({:east,  {x, y}}, "A"), do: {:east,  {x + 1, y}}
   def simulate({:south, {x, y}}, "A"), do: {:south, {x, y - 1}}
   def simulate({:west,  {x, y}}, "A"), do: {:west,  {x - 1, y}}
- def simulate(robot, instructions) do
+  def simulate(robot, instructions) do
     {instruction, rest} = String.next_grapheme(instructions)
 
     cond do
