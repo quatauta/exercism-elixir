@@ -52,10 +52,7 @@ defmodule RobotSimulator do
   Valid directions are: `:north`, `:east`, `:south`, `:west`
   """
   @spec direction(robot :: any) :: atom
-  def direction(robot) do
-    { direction, _ } = robot
-    direction
-  end
+  def direction({ direction, _ }), do: direction
 
   defp valid_direction?(:north), do: true
   defp valid_direction?(:east),  do: true
@@ -67,10 +64,7 @@ defmodule RobotSimulator do
   Return the robot's position.
   """
   @spec position(robot :: any) :: {integer, integer}
-  def position(robot) do
-    { _, position } = robot
-    position
-  end
+  def position({ _, position }), do: position
 
   defp valid_position?({x, y}) when is_integer(x) and is_integer(y), do: true
   defp valid_position?(_), do: false
