@@ -1,5 +1,5 @@
 defmodule RobotSimulator do
-  defguard is_direction(direction) when direction == :north or direction == :east or direction == :south or direction == :west
+  defguard is_direction(direction) when direction in [:north, :east, :south, :west]
   defguard is_position(position) when tuple_size(position) == 2 and is_integer(elem(position, 0)) and is_integer(elem(position, 1))
   defp valid_instruction?("R"), do: true
   defp valid_instruction?("L"), do: true
