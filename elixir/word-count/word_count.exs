@@ -18,10 +18,10 @@ defmodule Words do
   end
 
   defp count_words(words) do
-    Enum.reduce(words, %{}, fn(word, count) -> increment(word, count) end)
+    Enum.reduce(words, %{}, fn word, count -> increment(word, count) end)
   end
 
   def increment(word, count) do
-    Map.update(count, word, 1, fn(word_count) -> word_count + 1 end)
+    Map.update(count, word, 1, fn word_count -> word_count + 1 end)
   end
 end

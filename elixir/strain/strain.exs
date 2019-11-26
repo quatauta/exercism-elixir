@@ -7,10 +7,11 @@ defmodule Strain do
   """
   @spec keep(list :: list(any), fun :: (any -> boolean)) :: list(any)
   def keep([], _), do: []
+
   def keep([head | tail], fun) do
     cond do
       fun.(head) -> [head | keep(tail, fun)]
-      true       -> keep(tail, fun)
+      true -> keep(tail, fun)
     end
   end
 

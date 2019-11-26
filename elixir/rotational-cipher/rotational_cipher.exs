@@ -13,11 +13,11 @@ defmodule RotationalCipher do
 
   def rotate(_, _), do: ""
 
-  def rotate_char(char, shift) when (char >= ?a and char <= ?z) do
+  def rotate_char(char, shift) when char >= ?a and char <= ?z do
     ?a + rem(char - ?a + shift, ?z - ?a + 1)
   end
 
-  def rotate_char(char, shift) when (char >= ?A and char <= ?Z) do
+  def rotate_char(char, shift) when char >= ?A and char <= ?Z do
     ?A + rem(char - ?A + shift, ?Z - ?A + 1)
   end
 

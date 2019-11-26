@@ -22,7 +22,7 @@ defmodule PigLatin do
 
   defp translate_words([]), do: []
 
-  defp translate_words([head | tail]), do:  [translate_word(head)] ++ translate_words(tail)
+  defp translate_words([head | tail]), do: [translate_word(head)] ++ translate_words(tail)
 
   defp join(list), do: Enum.join(list, " ")
 

@@ -4,15 +4,20 @@ defmodule ProteinTranslation do
   """
   @spec of_rna(String.t()) :: {atom, list(String.t())}
   def of_rna(""), do: {:ok, []}
+
   def of_rna(rna) do
     case of_codon(String.slice(rna, 0..2)) do
-      {:ok, "STOP"} -> {:ok, []}
+      {:ok, "STOP"} ->
+        {:ok, []}
+
       {:ok, protein} ->
         case of_rna(String.slice(rna, 3..-1)) do
           {:ok, list} -> {:ok, [protein] ++ list}
           _ -> {:error, "invalid RNA"}
         end
-      _ -> {:error, "invalid RNA"}
+
+      _ ->
+        {:error, "invalid RNA"}
     end
   end
 
@@ -55,5 +60,5 @@ defmodule ProteinTranslation do
   def of_codon("UAA"), do: {:ok, "STOP"}
   def of_codon("UAG"), do: {:ok, "STOP"}
   def of_codon("UGA"), do: {:ok, "STOP"}
-  def of_codon(_),     do: {:error, "invalid codon"}
+  def of_codon(_), do: {:error, "invalid codon"}
 end

@@ -12,14 +12,14 @@ defmodule Markdown do
   """
   @spec parse(String.t()) :: String.t()
   def parse(markdown) do
-    markdown |> String.split("\n") |> Enum.map(fn t -> process(t) end) |> Enum.join |> patch
+    markdown |> String.split("\n") |> Enum.map(fn t -> process(t) end) |> Enum.join() |> patch
   end
 
   defp process(t) do
     cond do
       String.starts_with?(t, "#") -> t |> parse_header_md_level |> enclose_with_header_tag
       String.starts_with?(t, "*") -> t |> parse_list_md_level
-      true -> t |> String.split |> enclose_with_paragraph_tag
+      true -> t |> String.split() |> enclose_with_paragraph_tag
     end
   end
 
@@ -29,7 +29,7 @@ defmodule Markdown do
   end
 
   defp parse_list_md_level(list) do
-    words = list |> String.trim_leading("* ") |> String.split
+    words = list |> String.trim_leading("* ") |> String.split()
     "<li>#{join_words_with_tags(words)}</li>"
   end
 
@@ -66,6 +66,8 @@ defmodule Markdown do
   end
 
   defp patch(list) do
-    list |> String.replace("<li>", "<ul><li>", global: false) |> String.replace_suffix("</li>", "</li></ul>")
+    list
+    |> String.replace("<li>", "<ul><li>", global: false)
+    |> String.replace_suffix("</li>", "</li></ul>")
   end
 end

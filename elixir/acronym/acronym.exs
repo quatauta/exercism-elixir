@@ -5,6 +5,6 @@ defmodule Acronym do
   """
   @spec abbreviate(String.t()) :: String.t()
   def abbreviate(string) do
-    Regex.scan(~r/\b\pL|\p{Lu}/, string) |> Enum.join |> String.upcase
+    Regex.scan(~r/\b\pL|\p{Lu}/, string) |> Enum.join() |> String.upcase()
   end
 end

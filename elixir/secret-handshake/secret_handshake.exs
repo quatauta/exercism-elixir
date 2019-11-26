@@ -21,7 +21,7 @@ defmodule SecretHandshake do
       0b0001 => "wink",
       0b0010 => "double blink",
       0b0100 => "close your eyes",
-      0b1000 => "jump",
+      0b1000 => "jump"
     }
 
     handshake = Enum.map(codes, fn {k, v} -> if (code &&& k) == k, do: v end)

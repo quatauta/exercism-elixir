@@ -45,11 +45,17 @@ defmodule BankAccount do
 
   def init(account), do: {:ok, account}
 
-  def handle_call({:close}, _from, {_, balance}), do: {:reply, {:closed, balance}, {:closed, balance}}
+  def handle_call({:close}, _from, {_, balance}),
+    do: {:reply, {:closed, balance}, {:closed, balance}}
 
-  def handle_call({:balance}, _from, {:open,   balance}), do: {:reply, balance, {:open, balance}}
-  def handle_call({:balance}, _from, {:closed, balance}), do: {:reply, {:error, :account_closed}, {:closed, balance}}
+  def handle_call({:balance}, _from, {:open, balance}), do: {:reply, balance, {:open, balance}}
 
-  def handle_call({:update, amount}, _from, {:open,   balance}), do: {:reply, balance + amount, {:open, balance + amount}}
-  def handle_call({:update, _amount}, _from, {:closed, balance}), do: {:reply, {:error, :account_closed}, {:closed, balance}}
+  def handle_call({:balance}, _from, {:closed, balance}),
+    do: {:reply, {:error, :account_closed}, {:closed, balance}}
+
+  def handle_call({:update, amount}, _from, {:open, balance}),
+    do: {:reply, balance + amount, {:open, balance + amount}}
+
+  def handle_call({:update, _amount}, _from, {:closed, balance}),
+    do: {:reply, {:error, :account_closed}, {:closed, balance}}
 end

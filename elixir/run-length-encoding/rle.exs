@@ -9,6 +9,7 @@ defmodule RunLengthEncoder do
   @spec encode(String.t()) :: String.t()
   def encode(nil), do: ""
   def encode(""), do: ""
+
   def encode(string) do
     {head, tail} = String.next_grapheme(string)
     encode_helper(tail, head, 1)
@@ -27,16 +28,21 @@ defmodule RunLengthEncoder do
   end
 
   defp encode_print(grapheme, 1), do: grapheme
+
   defp encode_print(grapheme, count) do
     Integer.to_string(count) <> grapheme
   end
 
   @spec decode(String.t()) :: String.t()
   def decode(""), do: ""
+
   def decode(string) do
     Regex.scan(~r/(\d*)(\D)/i, string)
-    |> Enum.map(fn e -> [_, n, s] = e ; decode_print(n, s) end)
-    |> Enum.join
+    |> Enum.map(fn e ->
+      [_, n, s] = e
+      decode_print(n, s)
+    end)
+    |> Enum.join()
   end
 
   defp decode_print("", string), do: string
