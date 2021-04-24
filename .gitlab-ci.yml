@@ -10,6 +10,9 @@ cache:
 test_python:
   stage: test
   image: python:3-alpine
+  artifacts:
+  reports:
+    junit: pytest.xml
   script:
     - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0KPython setup"
     - python -V
@@ -19,5 +22,5 @@ test_python:
     - pip install -q pytest
     - echo -e "\e[0Ksection_end:`date +%s`:python_setup\r\e[0K"
     - echo -e "\e[0Ksection_start:`date +%s`:pytest\r\e[0Kpytest"
-    - pytest ./python/*/*_test.py
+    - pytest --junitxml="pytest.xml" ./python/*/*_test.py
     - echo -e "\e[0Ksection_end:`date +%s`:pytest\r\e[0K"
