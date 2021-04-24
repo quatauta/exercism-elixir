@@ -11,8 +11,8 @@ test_python:
   stage: test
   image: python:3-alpine
   artifacts:
-  reports:
-    junit: pytest.xml
+    reports:
+      junit: pytest.xml
   script:
     - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0KPython setup"
     - python -V
