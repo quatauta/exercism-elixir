@@ -11,9 +11,13 @@ test_python:
   stage: test
   image: python:3-alpine
   script:
+    - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0KPython setup"
     - python -V
     - pip install -q virtualenv
     - virtualenv venv
     - source venv/bin/activate
     - pip install -q pytest
+    - echo -e "\e[0Ksection_end:`date +%s`:python_setup\r\e[0K"
+    - echo -e "\e[0Ksection_start:`date +%s`:pytest\r\e[0Kpytest"
     - pytest ./python/*/*_test.py
+    - echo -e "\e[0Ksection_end:`date +%s`:pytest\r\e[0K"
