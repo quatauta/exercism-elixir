@@ -1,9 +1,10 @@
-*.beam
-*.ez
-/.fetch
 /_build
-/config/*.secret.exs
 /cover
 /deps
 /doc
+/.fetch
 erl_crash.dump
+*.ez
+*.beam
+/config/*.secret.exs
+.elixir_ls/
