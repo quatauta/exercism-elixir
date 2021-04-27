@@ -2,9 +2,7 @@ import re
 import string
 
 def count_words(sentence):
-    words = re.split("[^a-z0-9']", sentence.lower())
-    words = [re.sub("(^'+|'+$)", "", w) for w in words]
-    words = [w for w in words if w]
+    words = re.sub(r"\W\B|\B\W|_|,", " ", sentence).lower().split()
     counts = {}
 
     for word in words:
