@@ -4,10 +4,7 @@ import string
 
 def score(word):
     letter_count = Counter(letters(word.lower()))
-    letter_scores = map(lambda x: x[1] * letter_score(x[0]), letter_count.items())
-    total_score = reduce(lambda x, y: x + y, letter_scores, 0)
-
-    return total_score
+    return sum(map(lambda x: x[1] * letter_score(x[0]), letter_count.items()))
 
 def letter_score(letter):
     letter_classes = { "aeioulnrst": 1, "dg": 2, "bcmp": 3, "fhvwy": 4, "k": 5, "jx": 8, "qz": 10 }
