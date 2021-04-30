@@ -3,14 +3,15 @@ from functools import *
 import string
 
 def score(word):
-    letter_count = Counter(letters(word.lower()))
-    return sum(map(lambda x: x[1] * letter_score(x[0]), letter_count.items()))
+    return sum(map(lambda letter: letter_score(letter), word.upper()))
 
 def letter_score(letter):
-    letter_classes = { "aeioulnrst": 1, "dg": 2, "bcmp": 3, "fhvwy": 4, "k": 5, "jx": 8, "qz": 10 }
-    score = [score for letters, score in letter_classes.items() if letter in letters][0]
+    A = E = I = O = U = L = N = R = S = T = 1
+    D = G = 2
+    B = C = M = P = 3
+    F = H = V = W = Y = 4
+    K = 5
+    J = X = 8
+    Q = Z = 10
 
-    return score
-
-def letters(word):
-    return list(filter(lambda letter: letter in string.ascii_letters, list(word)))
+    return locals().get(letter.upper(), 0)
