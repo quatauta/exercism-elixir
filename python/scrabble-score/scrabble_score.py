@@ -1,9 +1,8 @@
-from collections import Counter
-from functools import *
-import string
-
 def score(word):
-    return sum(map(lambda letter: letter_score(letter), word.upper()))
+    return sum(letters_scores(word))
+
+def letters_scores(letters):
+    return map(lambda letter: letter_score(letter), letters)
 
 def letter_score(letter):
     A = E = I = O = U = L = N = R = S = T = 1
