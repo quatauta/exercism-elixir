@@ -30,7 +30,7 @@ test_python:
     - pip install -q pylint pytest
     - echo -e "\e[0Ksection_end:`date +%s`:python_setup\r\e[0K"
     - echo -e "\e[0Ksection_start:`date +%s`:pylint\r\e[0Kpylint"
-    - pylint ./python/
+    - pylint ./python/ || true
     - echo -e "\e[0Ksection_end:`date +%s`:pylint\r\e[0K"
     - echo -e "\e[0Ksection_start:`date +%s`:pytest\r\e[0Kpytest"
     - pytest --junitxml="pytest.xml" ./python/
