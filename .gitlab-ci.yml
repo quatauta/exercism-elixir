@@ -22,13 +22,16 @@ test_python:
     reports:
       junit: pytest.xml
   script:
-    - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0KPython setup"
+    - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0Kpython_setup"
     - python -V
     - pip install -q virtualenv
     - virtualenv venv
     - source venv/bin/activate
-    - pip install -q pytest
+    - pip install -q pylint pytest
     - echo -e "\e[0Ksection_end:`date +%s`:python_setup\r\e[0K"
+    - echo -e "\e[0Ksection_start:`date +%s`:pylint\r\e[0Kpylint"
+    - pylint ./python/
+    - echo -e "\e[0Ksection_end:`date +%s`:pylint\r\e[0K"
     - echo -e "\e[0Ksection_start:`date +%s`:pytest\r\e[0Kpytest"
     - pytest --junitxml="pytest.xml" ./python/
     - echo -e "\e[0Ksection_end:`date +%s`:pytest\r\e[0K"
