@@ -8,7 +8,7 @@ defmodule RNATranscription do
   'UGAC'
   """
   @spec to_rna([char]) :: [char]
-  def to_rna([head | tail]), do: to_rna(head) ++ to_rna(tail)
+  def to_rna([head | tail ]), do: to_rna(head) ++ to_rna(tail)
   def to_rna([]), do: ''
   def to_rna(?A), do: 'U'
   def to_rna(?T), do: 'A'
