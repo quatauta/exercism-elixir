@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ci_section_begin() {
+ci_section_start() {
     SECTION="$1"
     DESCRIPTION="$2"
     echo -e "\e[0Ksection_start:$(date +%s):${SECTION}\r\e[0K${DESCRIPTION:-$SECTION}"

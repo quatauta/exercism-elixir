@@ -23,14 +23,14 @@ test_python:
       junit: pytest.xml
   script:
     - source .gitlab/ci.sh
-    - ci_section_begin setup
+    - ci_section_start setup
     - python -V
     - pip install -q virtualenv
     - virtualenv venv
     - source venv/bin/activate
     - pip install -q pylint pytest
     - ci_section_end setup
-    - ci_section_begin pylint
+    - ci_section_start pylint
     - pylint ./python/ || true
     - ci_section_end pylint
     - ci_section_start pytest
