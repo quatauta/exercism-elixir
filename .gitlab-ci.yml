@@ -22,16 +22,17 @@ test_python:
     reports:
       junit: pytest.xml
   script:
-    - echo -e "\e[0Ksection_start:`date +%s`:python_setup\r\e[0Kpython_setup"
+    - source .gitlab/ci.sh
+    - ci_section_begin setup
     - python -V
     - pip install -q virtualenv
     - virtualenv venv
     - source venv/bin/activate
     - pip install -q pylint pytest
-    - echo -e "\e[0Ksection_end:`date +%s`:python_setup\r\e[0K"
-    - echo -e "\e[0Ksection_start:`date +%s`:pylint\r\e[0Kpylint"
+    - ci_section_end setup
+    - ci_section_begin pylint
     - pylint ./python/ || true
-    - echo -e "\e[0Ksection_end:`date +%s`:pylint\r\e[0K"
-    - echo -e "\e[0Ksection_start:`date +%s`:pytest\r\e[0Kpytest"
+    - ci_section_end pylint
+    - ci_section_start pytest
     - pytest --junitxml="pytest.xml" ./python/
-    - echo -e "\e[0Ksection_end:`date +%s`:pytest\r\e[0K"
+    - ci_section_end pytest
