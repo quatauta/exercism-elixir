@@ -22,7 +22,6 @@ test_elixir:
     - source .gitlab/ci.sh
     - find elixir/ -mindepth 1 -maxdepth 1 -type d | sort |
       while read -r TESTCASE ; do
-        ci_section_start "${TESTCASE}" ;
         (
           cd "${TESTCASE}" ;
           find . -maxdepth 1 -iname "*_test.exs" -print0 |
@@ -30,7 +29,6 @@ test_elixir:
           find . -maxdepth 1 -iname "mix.exs" -print0 |
           xargs -0rt -IPROJECT mix test || exit 1 ;
         ) ;
-        ci_section_end "${TESTCASE}" ;
       done
 
 test_python:
