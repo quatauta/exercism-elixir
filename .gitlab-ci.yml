@@ -18,6 +18,9 @@ cache:
 test_elixir:
   stage: test
   image: elixir:alpine
+  artifacts:
+    reports:
+      junit: ./elixir/*/_build/test/lib/*/test-junit-report.xml
   script:
     - source .gitlab/ci.sh
     - find elixir/ -mindepth 1 -maxdepth 1 -type d | sort |
@@ -27,7 +30,7 @@ test_elixir:
           find . -maxdepth 1 -iname "*_test.exs" -print0 |
           xargs -0rtn1 elixir || exit 1 ;
           find . -maxdepth 1 -iname "mix.exs" -print0 |
-          xargs -0rt -IPROJECT mix test || exit 1 ;
+          xargs -0rt -IPROJECT sh -c 'mix local.hex --force --if-missing && mix deps.get && mix test' || exit 1 ;
         ) ;
       done
 
