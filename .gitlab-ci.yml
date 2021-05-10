@@ -14,6 +14,7 @@ test_elixir:
   stage: test
   image: elixir:alpine
   cache:
+    key: elixir
     paths:
       - elixir/*/_build/
   artifacts:
@@ -36,6 +37,7 @@ test_python:
   stage: test
   image: python:3-alpine
   cache:
+    key: python
     paths:
       - .cache/pip
       - venv/
