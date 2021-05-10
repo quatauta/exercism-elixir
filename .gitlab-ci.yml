@@ -10,15 +10,12 @@ include:
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
-cache:
-  paths:
-    - .cache/pip
-    - venv/
-      elixir/*/_build/
-
 test_elixir:
   stage: test
   image: elixir:alpine
+  cache:
+    paths:
+      - elixir/*/_build/
   artifacts:
     reports:
       junit: ./elixir/*/_build/test/lib/*/test-junit-report.xml
@@ -38,6 +35,10 @@ test_elixir:
 test_python:
   stage: test
   image: python:3-alpine
+  cache:
+    paths:
+      - .cache/pip
+      - venv/
   artifacts:
     reports:
       junit: pytest.xml
