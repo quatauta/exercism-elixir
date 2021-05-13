@@ -39,7 +39,8 @@ test_elixir:
     - find elixir/*/_build/test/lib/*/ -iname "test-junit-report.xml" |
       while read REPORT ; do
         EXERCISE_HOME="${REPORT%/_build/test/lib/*/test-junit-report.xml}" ;
-        sed -i -e "s_file=\"test/_file=\"${EXERCISE_HOME}/test/_g" "${REPORT}" ;
+        sed -i -e "s_file=\"test/_file=\"${EXERCISE_HOME}/test/_g"
+               -e 's_\(\.exs\):\([0-9]\+\)_\1#L\2_g' "${REPORT}" ;
       done
     - ci_section_end junit_report_filename_update
 
