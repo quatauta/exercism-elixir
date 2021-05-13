@@ -22,6 +22,7 @@ test_elixir:
       junit: ./elixir/*/_build/test/lib/*/test-junit-report.xml
   script:
     - source .gitlab/ci.sh
+    - ci_section_start elixir_mix_test
     - find elixir/ -mindepth 1 -maxdepth 1 -type d | sort |
       while read -r TESTCASE ; do
         (
@@ -32,6 +33,15 @@ test_elixir:
           xargs -0rt -IPROJECT sh -c 'mix local.hex --force --if-missing && mix deps.get && mix test' || exit 1 ;
         ) ;
       done
+    - ci_section_end elixir_mix_test
+    - ci_section_start junit_report_filename_update
+    - echo "Updating JUnit reports test case filenames ..."
+    - find elixir/*/_build/test/lib/*/ -iname "test-junit-report.xml" |
+      while read REPORT ; do
+        EXERCISE_HOME="${REPORT%/_build/test/lib/*/test-junit-report.xml}" ;
+        sed -i -e "s_file=\"test/_file=\"${EXERCISE_HOME}/test/_g" "${REPORT}" ;
+      done
+    - ci_section_end junit_report_filename_update
 
 test_python:
   stage: test
