@@ -28,7 +28,7 @@ be decoded always represent the count for the following character.
 Execute the tests with:
 
 ```bash
-$ elixir run_length_encoding_test.exs
+$ mix test
 ```
 
 ### Pending tests
@@ -54,8 +54,9 @@ Or, you can enable all the tests by commenting out the
 # ExUnit.configure exclude: :pending, trace: true
 ```
 
-For more detailed information about the Elixir track, please
-see the [help page](http://exercism.io/languages/elixir).
+If you're stuck on something, it may help to look at some of
+the [available resources](https://exercism.io/tracks/elixir/resources)
+out there where answers might be found.
 
 ## Source
 
