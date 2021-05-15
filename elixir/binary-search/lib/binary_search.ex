@@ -24,8 +24,11 @@ defmodule BinarySearch do
     search(numbers, key, 0, tuple_size(numbers) - 1)
   end
 
+  @spec search(tuple, integer, integer, integer) :: {:ok, integer} | :not_found
   defp search({}, _, _, _), do: :not_found
+  defp search({key}, key, _, _), do: {:ok, 0}
   defp search(numbers, key, _, last) when key > elem(numbers, last), do: :not_found
+  defp search(numbers, key, first, _) when key < elem(numbers, first), do: :not_found
 
   defp search(numbers, key, first, last) do
     median_position = first + div(last - first, 2)
@@ -33,8 +36,8 @@ defmodule BinarySearch do
 
     cond do
       key == median -> {:ok, median_position}
-      key < median -> search(numbers, key, first, median_position - 1)
-      key > median -> search(numbers, key, median_position + 1, last)
+      key < median -> search(numbers, key, first, max(first, median_position - 1))
+      key > median -> search(numbers, key, min(median_position + 1, last), last)
     end
   end
 end
