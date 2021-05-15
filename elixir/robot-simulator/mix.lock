@@ -1,0 +1,3 @@
+%{
+  "junit_formatter": {:hex, :junit_formatter, "3.2.0", "6a64d6327c48472e983af7645aeb1d756cad4b33c5ab3a5db820f13d6d2b85fe", [:mix], [], "hexpm", "043d6f660667ee64c6d7e5edb867b7900c395356346e77185879449b50486681"},
+}
