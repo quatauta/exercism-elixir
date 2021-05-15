@@ -20,7 +20,9 @@ defmodule BinarySearch do
   @spec search(tuple, integer) :: {:ok, integer} | :not_found
   def search({}, _), do: :not_found
 
-  def search(numbers, key), do: search(numbers, key, 0, tuple_size(numbers) - 1)
+  def search(numbers, key) do
+    search(numbers, key, 0, tuple_size(numbers) - 1)
+  end
 
   defp search({}, _, _, _), do: :not_found
   defp search(numbers, key, _, last) when key > elem(numbers, last), do: :not_found
