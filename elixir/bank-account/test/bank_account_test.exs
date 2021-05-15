@@ -1,27 +1,3 @@
-if !System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("account.exs", __DIR__)
-end
-
-ExUnit.start()
-# ExUnit.configure(exclude: :pending, trace: true)
-
-# The BankAccount module should support four calls:
-#
-# open_bank()
-#   Called at the start of each test. Returns an account handle.
-#
-# close_bank(account)
-#   Called at the end of each test.
-#
-# balance(account)
-#   Get the balance of the bank account.
-#
-# update(account, amount)
-#   Increment the balance of the bank account by the given amount.
-#   The amount may be negative for a withdrawal.
-#
-# The initial value of the bank account should be 0.
-
 defmodule BankAccountTest do
   use ExUnit.Case
 
@@ -77,5 +53,18 @@ defmodule BankAccountTest do
     end
 
     assert BankAccount.balance(account) == 20
+  end
+
+  @tag :pending
+  test "implementation for multiple account support", %{account: account} do
+    assert is_pid(account)
+
+    account_two = BankAccount.open_bank()
+    assert is_pid(account_two)
+
+    assert account != account_two
+
+    BankAccount.update(account, 20)
+    assert BankAccount.balance(account) != BankAccount.balance(account_two)
   end
 end
