@@ -54,6 +54,7 @@ test_python:
       - venv/
   artifacts:
     reports:
+      cobertura: python-coverage.xml
       junit: pytest.xml
   script:
     - source .gitlab/ci.sh
@@ -62,11 +63,12 @@ test_python:
     - pip install -q virtualenv
     - virtualenv venv
     - source venv/bin/activate
-    - pip install -q pylint pytest
+    - pip install -q coverage pylint pytest pytest-cov
     - ci_section_end setup
     - ci_section_start pylint
     - pylint ./python/ || true
     - ci_section_end pylint
     - ci_section_start pytest
-    - pytest --junitxml="pytest.xml" ./python/
+    - pytest --junitxml="pytest.xml" --cov=python --cov-branch ./python/
+    - coverage xml --omit='*_test.py' -o python-coverage.xml
     - ci_section_end pytest
