@@ -1,5 +1,5 @@
 defmodule Acronym do
-  @doc """
+  @moduledoc """
   Generate an acronym from a string.
   "This is a string" => "TIAS"
   """
@@ -7,7 +7,7 @@ defmodule Acronym do
   def abbreviate(string) do
     ~r/(?<![[:upper:]])[[:upper:]]|(?<!\')\b[[:alpha:]]/u
     |> Regex.scan(string)
-    |> Enum.join
-    |> String.upcase
+    |> Enum.join()
+    |> String.upcase()
   end
 end

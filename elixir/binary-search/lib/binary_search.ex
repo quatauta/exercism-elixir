@@ -1,5 +1,5 @@
 defmodule BinarySearch do
-  @doc """
+  @moduledoc """
     Searches for a key in the tuple using the binary search algorithm.
     It returns :not_found if the key is not in the tuple.
     Otherwise returns {:ok, index}.

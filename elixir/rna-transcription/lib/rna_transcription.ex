@@ -1,5 +1,5 @@
 defmodule RnaTranscription do
-  @doc """
+  @moduledoc """
   Transcribes a character list representing DNA nucleotides to RNA
 
   ## Examples

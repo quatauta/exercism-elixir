@@ -1,5 +1,5 @@
 defmodule PigLatin do
-  @doc """
+  @moduledoc """
   Given a `phrase`, translate it a word at a time to Pig Latin.
 
   Words beginning with consonants should have the consonant moved to the end of

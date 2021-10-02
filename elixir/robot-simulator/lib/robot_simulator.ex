@@ -1,4 +1,5 @@
 defmodule RobotSimulator do
+  @moduledoc false
   defguard is_direction(direction) when direction in [:north, :east, :south, :west]
 
   defguard is_position(position)
@@ -52,9 +53,10 @@ defmodule RobotSimulator do
   def simulate(robot, instructions) do
     {instruction, rest} = String.next_grapheme(instructions)
 
-    cond do
-      !valid_instruction?(instruction) -> {:error, "invalid instruction"}
-      true -> simulate(simulate(robot, instruction), rest)
+    if valid_instruction?(instruction) do
+      simulate(simulate(robot, instruction), rest)
+    else
+      {:error, "invalid instruction"}
     end
   end
 

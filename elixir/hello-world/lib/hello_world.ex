@@ -1,5 +1,5 @@
 defmodule HelloWorld do
-  @doc """
+  @moduledoc """
   Simply returns "Hello, World!"
   """
   @spec hello :: String.t()

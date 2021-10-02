@@ -1,5 +1,5 @@
 defmodule ProteinTranslation do
-  @doc """
+  @moduledoc """
   Given an RNA string, return a list of proteins specified by codons, in order.
   """
   @spec of_rna(String.t()) :: {atom, list(String.t())}

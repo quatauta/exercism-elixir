@@ -1,5 +1,5 @@
 defmodule Raindrops do
-  @doc """
+  @moduledoc """
   Returns a string based on raindrop factors.
 
   - If the number contains 3 as a prime factor, output 'Pling'.
@@ -12,9 +12,10 @@ defmodule Raindrops do
   def convert(number) do
     raindrops = pling(number) <> plang(number) <> plong(number)
 
-    cond do
-      raindrops == "" -> Integer.to_string(number)
-      true -> raindrops
+    if raindrops == "" do
+      Integer.to_string(number)
+    else
+      raindrops
     end
   end
 

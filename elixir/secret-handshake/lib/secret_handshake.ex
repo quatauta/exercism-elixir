@@ -1,7 +1,7 @@
 use Bitwise
 
 defmodule SecretHandshake do
-  @doc """
+  @moduledoc """
   Determine the actions of a secret handshake based on the binary
   representation of the given `code`.
 
@@ -27,9 +27,10 @@ defmodule SecretHandshake do
     handshake = Enum.map(codes, fn {k, v} -> if (code &&& k) == k, do: v end)
     handshake = Enum.reject(handshake, &is_nil/1)
 
-    cond do
-      (code &&& 16) == 16 -> Enum.reverse(handshake)
-      true -> handshake
+    if (code &&& 16) == 16 do
+      Enum.reverse(handshake)
+    else
+      handshake
     end
   end
 end

@@ -1,11 +1,13 @@
 defmodule BeerSong do
-  @doc """
+  @moduledoc """
   Get a single verse of the beer song
   """
   @spec verse(integer) :: String.t()
   def verse(number) do
-    String.capitalize(bottles(number)) <> " of beer on the wall, " <>
-      bottles(number) <> " of beer.\n" <>
+    String.capitalize(bottles(number)) <>
+      " of beer on the wall, " <>
+      bottles(number) <>
+      " of beer.\n" <>
       take(number) <> ", " <> more(number) <> ".\n"
   end
 

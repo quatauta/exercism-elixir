@@ -1,5 +1,5 @@
 defmodule RotationalCipher do
-  @doc """
+  @moduledoc """
   Given a plaintext and amount to shift by, return a rotated string.
 
   Example:
