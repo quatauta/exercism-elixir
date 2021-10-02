@@ -16,7 +16,9 @@ test_elixir:
   cache:
     key: elixir
     paths:
+      - .cache/elixir/
       - elixir/*/_build/
+      - elixir/*/deps/
   artifacts:
     reports:
       junit: ./elixir/*/_build/test/lib/*/test-junit-report.xml

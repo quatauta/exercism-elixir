@@ -14,7 +14,16 @@ diff --git a/mix.exs b/mix.exs
 index 2ba5afc..1369248 100644
 --- a/mix.exs
 +++ b/mix.exs
-@@ -23,6 +23,7 @@ defp deps do
+@@ -7,7 +7,8 @@ def project do
+       version: "0.1.0",
+       # elixir: "~> 1.8",
+       start_permanent: Mix.env() == :prod,
+-      deps: deps()
++      deps: deps(),
++      deps_path: "../../.cache/elixir"
+     ]
+   end
+@@ -24,6 +24,7 @@ defp deps do
      [
        # {:dep_from_hexpm, "~> 0.3.0"},
        # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
