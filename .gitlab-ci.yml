@@ -21,6 +21,7 @@ elixir:
   artifacts:
     reports:
       junit: elixir/_build/test/lib/excercism/test-junit-report.xml
+  coverage: /^ +(\d+\.\d+%) \| Total$/
   script:
     - source .gitlab/ci.sh
     - for CMD in setup lint test ; do ci_section "elixir-${CMD}" "bin/elixir-${CMD}" ; done
@@ -38,6 +39,7 @@ python:
       junit: pytest.xml
   before_script:
     - apk add --no-cache bash
+  coverage: /^TOTAL .* (\d+%)$/
   script:
     - source .gitlab/ci.sh
     - for CMD in setup lint test ; do ci_section "python-${CMD}" "bin/python-${CMD}" ; done
