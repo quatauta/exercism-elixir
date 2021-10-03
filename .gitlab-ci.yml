@@ -10,67 +10,34 @@ include:
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
-test_elixir:
+elixir:
   stage: test
   image: elixir:alpine
   cache:
     key: elixir
     paths:
-      - .cache/elixir/
-      - elixir/*/_build/
-      - elixir/*/deps/
+      - elixir/_build
+      - elixir/deps
   artifacts:
     reports:
-      junit: ./elixir/*/_build/test/lib/*/test-junit-report.xml
+      junit: elixir/_build/test/lib/excercism/test-junit-report.xml
   script:
     - source .gitlab/ci.sh
-    - ci_section_start elixir_mix_test
-    - find elixir/ -mindepth 1 -maxdepth 1 -type d | sort |
-      while read -r TESTCASE ; do
-        (
-          cd "${TESTCASE}" ;
-          find . -maxdepth 1 -iname "*_test.exs" -print0 |
-          xargs -0rtn1 elixir || exit 1 ;
-          find . -maxdepth 1 -iname "mix.exs" -print0 |
-          xargs -0rt -IPROJECT sh -c 'mix local.hex --force --if-missing && mix deps.get && mix test' || exit 1 ;
-        ) ;
-      done
-    - ci_section_end elixir_mix_test
-    - ci_section_start junit_report_filename_update
-    - echo "Updating JUnit reports test case filenames ..."
-    - find elixir/*/_build/test/lib/*/ -iname "test-junit-report.xml" |
-      while read REPORT ; do
-        EXERCISE_HOME="${REPORT%/_build/test/lib/*/test-junit-report.xml}" ;
-        sed -i -e "s_file=\"test/_file=\"${EXERCISE_HOME}/test/_g"
-               -e 's_\(\.exs\):\([0-9]\+\)_\1#L\2_g' "${REPORT}" ;
-      done
-    - ci_section_end junit_report_filename_update
+    - for CMD in setup lint test ; do ci_section "elixir-${CMD}" "bin/elixir-${CMD}" ; done
 
-test_python:
+python:
   stage: test
   image: python:3-alpine
   cache:
     key: python
     paths:
-      - .cache/pip
-      - venv/
+      - .cache/python
   artifacts:
     reports:
       cobertura: python-coverage.xml
       junit: pytest.xml
+  before_script:
+    - apk add --no-cache bash
   script:
     - source .gitlab/ci.sh
-    - ci_section_start setup
-    - python -V
-    - pip install -q virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
-    - pip install -q coverage pylint pytest pytest-cov
-    - ci_section_end setup
-    - ci_section_start pylint
-    - pylint ./python/ || true
-    - ci_section_end pylint
-    - ci_section_start pytest
-    - pytest --junitxml="pytest.xml" --cov=python --cov-branch ./python/
-    - coverage xml --omit='*_test.py' -o python-coverage.xml
-    - ci_section_end pytest
+    - for CMD in setup lint test ; do ci_section "python-${CMD}" "bin/python-${CMD}" ; done

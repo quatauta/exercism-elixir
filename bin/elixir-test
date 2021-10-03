@@ -1,0 +1,26 @@
+#!/bin/sh
+
+PROJECT_DIR="${CI_PROJECT_DIR}"
+
+if [ -z "${PROJECT_DIR}" ] ; then
+  if [ -z "$(command -v git)" ] ; then
+    PROJECT_DIR="$(git rev-parse --show-toplevel)"
+  else
+    for LEVEL_UP in "." ".." "../.." "../../.." "../../../.." "../../../../.." ; do
+      if [ -r "${LEVEL_UP}/LICENSE" ] ; then
+        PROJECT_DIR="${LEVEL_UP}"
+        break
+      fi
+    done
+  fi
+fi
+
+(
+  cd "${PROJECT_DIR}/elixir" || exit 1
+  mix credo --format oneline
+  mix test || exit 1
+  sed -i".bak" -E \
+      -e 's/(\.exs):([0-9]+)/\1#L\2/g' \
+      -e 's!file="test/([^/]*)/!file="elixir/lib/\1/test/!g' \
+      "_build/test/lib/excercism/test-junit-report.xml"
+)

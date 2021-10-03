@@ -1,0 +1,39 @@
+#!/bin/sh
+
+PROJECT_DIR="${CI_PROJECT_DIR}"
+
+if [ -z "${PROJECT_DIR}" ] ; then
+  if [ -z "$(command -v git)" ] ; then
+    PROJECT_DIR="$(git rev-parse --show-toplevel)"
+  else
+    for LEVEL_UP in "." ".." "../.." "../../../" ; do
+      if [ -r "${LEVEL_UP}/LICENSE" ] ; then
+        PROJECT_DIR="${LEVEL_UP}"
+        break
+      fi
+    done
+  fi
+fi
+
+export CACHE_DIR="${PROJECT_DIR}/.cache/python"
+export PIP_CACHE_DIR="${CACHE_DIR}/pip"
+export PYTHONPATH="${CACHE_DIR}/target"
+export VENV_DIR="${CACHE_DIR}/venv"
+
+export PATH="${PYTHONPATH}/bin:${PATH}"
+
+(
+  cd "${PROJECT_DIR}" &&
+  python -V &&
+  (
+      command -v virtualenv >/dev/null ||
+      pip install --target="${PYTHONPATH}" --quiet virtualenv
+  ) &&
+  type virtualenv &&
+  (
+    [ -r "${VENV_DIR}/bin/activate" ] ||
+    virtualenv "${VENV_DIR}"
+  ) &&
+  . "${VENV_DIR}/bin/activate" &&
+  pip install -q coverage pylint pytest pytest-cov
+)
