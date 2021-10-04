@@ -1,13 +1,19 @@
-defmodule Accumulate.MixProject do
+defmodule ExercismElixir.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :excercism,
+      app: :excercism_elixir,
       version: "0.1.0",
-      # elixir: "~> 1.8",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      build_path: "../.cache/elixir/_build",
+      deps_path: "../.cache/elixir/deps",
+      config_path: "config.exs",
+      elixirc_paths: Path.wildcard("*/lib"),
+      test_paths: Path.wildcard("*/test"),
+      test_coverage: [output: "../.cache/elixir/cover"]
     ]
   end
 

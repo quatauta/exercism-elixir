@@ -16,12 +16,13 @@ elixir:
   cache:
     key: elixir
     paths:
-      - elixir/_build
-      - elixir/deps
+      - .cache/elixir
   artifacts:
     reports:
-      junit: elixir/_build/test/lib/excercism/test-junit-report.xml
+      junit: .cache/elixir/_build/test/lib/excercism_elixir/test-junit-report.xml
   coverage: /^ +(\d+\.\d+%) \| Total$/
+  variables:
+    MIX_ENV: test
   script:
     - source .gitlab/ci.sh
     - for CMD in setup lint test ; do ci_section "elixir-${CMD}" "bin/elixir-${CMD}" ; done

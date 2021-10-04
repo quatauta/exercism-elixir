@@ -17,10 +17,9 @@ fi
 
 (
   cd "${PROJECT_DIR}/elixir" || exit 1
-  mix credo --format oneline
   mix test --cover || exit 1
   sed -i".bak" -E \
       -e 's/(\.exs):([0-9]+)/\1#L\2/g' \
-      -e 's!file="test/([^/]*)/!file="elixir/lib/\1/test/!g' \
-      "_build/test/lib/excercism/test-junit-report.xml"
+      -e 's!file="([^/]*)/!file="elixir/\1/!g' \
+      "../.cache/elixir/_build/test/lib/excercism_elixir/test-junit-report.xml"
 )
