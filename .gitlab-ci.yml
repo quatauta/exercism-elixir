@@ -7,7 +7,7 @@ include:
   - template: 'Security/Secret-Detection.gitlab-ci.yml'
   - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
 
-elixir:
+test:
   stage: test
   image: elixir:alpine
   cache:
