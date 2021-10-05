@@ -1,5 +1,1 @@
 .cache
-.coverage
-coverage.xml
-pytest.xml
-python-coverage.xml
