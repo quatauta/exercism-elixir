@@ -1,14 +1,14 @@
 ---
 include:
-  - template: Jobs/Code-Intelligence.gitlab-ci.yml
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
-  - template: Security/License-Scanning.gitlab-ci.yml
-  - template: Security/SAST.gitlab-ci.yml
-  - template: Security/Secret-Detection.gitlab-ci.yml
-  - template: Workflows/MergeRequest-Pipelines.gitlab-ci.yml
+  - template: 'Jobs/Code-Intelligence.gitlab-ci.yml'
+  - template: 'Security/Dependency-Scanning.gitlab-ci.yml'
+  - template: 'Security/License-Scanning.gitlab-ci.yml'
+  - template: 'Security/SAST.gitlab-ci.yml'
+  - template: 'Security/Secret-Detection.gitlab-ci.yml'
+  - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
 
 elixir:
   stage: test
@@ -19,13 +19,15 @@ elixir:
       - .cache/elixir
   artifacts:
     reports:
-      junit: .cache/elixir/_build/test/lib/excercism_elixir/test-junit-report.xml
-  coverage: /^ +(\d+\.\d+%) \| Total$/
+      junit: '.cache/elixir/_build/test/lib/excercism_elixir/test-junit-report.xml'
+  coverage: '/^ +(\d+\.\d+%) \| Total$/'
   variables:
     MIX_ENV: test
   script:
     - source .gitlab/ci.sh
-    - for CMD in setup lint test ; do ci_section "elixir-${CMD}" "bin/elixir-${CMD}" ; done
+    - ci_section elixir-setup ./bin/elixir-setup
+    - ci_section elixir-lint  ./bin/elixir-lint
+    - ci_section elixir-test  ./bin/elixir-test
 
 python:
   stage: test
@@ -38,7 +40,9 @@ python:
     reports:
       cobertura: python-coverage.xml
       junit: pytest.xml
-  coverage: /^TOTAL .* (\d+%)$/
+  coverage: '/^TOTAL .* (\d+%)$/'
   script:
     - source .gitlab/ci.sh
-    - for CMD in setup lint test ; do ci_section "python-${CMD}" "bin/python-${CMD}" ; done
+    - ci_section python-setup ./bin/python-setup
+    - ci_section python-lint  ./bin/python-lint
+    - ci_section python-test  ./bin/python-test
