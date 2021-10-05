@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sed -i".bak" -E \
+    -e 's/(\.exs):([0-9]+)/\1#L\2/g' \
+    -e 's!file="([^/]*)/!file="elixir/\1/!g' \
+    ".cache/_build/test/lib/excercism_elixir/test-junit-report.xml"

@@ -12,16 +12,17 @@ elixir:
   image: elixir:alpine
   cache:
     paths:
-      - _build
-      - deps
+      - .cache
   artifacts:
     reports:
-      junit: '_build/test/lib/excercism_elixir/test-junit-report.xml'
+      junit: '.cache/_build/test/lib/excercism_elixir/test-junit-report.xml'
   coverage: '/^ +(\d+\.\d+%) \| Total$/'
   variables:
     MIX_ENV: test
   script:
     - source .gitlab/ci.sh
-    - ci_section setup ./bin/setup
-    - ci_section lint  ./bin/lint
-    - ci_section test  ./bin/test
+    - ci_section setup-hex mix local.hex --force --if-missing
+    - ci_section setup-deps mix deps.get
+    - ci_section lint mix credo --format oneline
+    - ci_section test mix test --cover
+    - ci_section junit-for-gitlab .gitlab/junit-for-gitlab

@@ -1,1 +1,11 @@
+*.beam
+*.ez
 .cache
+.fetch
+/config/*.secret.exs
+/deps
+/doc
+_build
+cover/
+elixir_ls/
+erl_crash.dump
