@@ -38,8 +38,6 @@ python:
     reports:
       cobertura: python-coverage.xml
       junit: pytest.xml
-  before_script:
-    - apk add --no-cache bash
   coverage: /^TOTAL .* (\d+%)$/
   script:
     - source .gitlab/ci.sh
