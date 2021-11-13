@@ -24,7 +24,8 @@ defmodule SecretHandshake do
       0b1000 => "jump"
     }
 
-    handshake = Enum.reject(Enum.map(codes, fn {k, v} -> if (code &&& k) == k, do: v end), &is_nil/1)
+    handshake =
+      Enum.reject(Enum.map(codes, fn {k, v} -> if (code &&& k) == k, do: v end), &is_nil/1)
 
     if (code &&& 16) == 16 do
       Enum.reverse(handshake)

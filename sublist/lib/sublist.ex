@@ -3,9 +3,7 @@ defmodule Sublist do
   Returns whether the first list is a sublist or a superlist of the second list
   and if not whether it is equal or unequal to the second list.
   """
-  @spec compare([], list) :: :sublist
-  @spec compare(list, []) :: :superlist
-  @spec compare(a :: nonempty_list, b :: nonempty_list) :: atom
+  @spec compare(list, list) :: :equal | :sublist | :superlist | :unequal
   def compare(a, a), do: :equal
 
   def compare(a, b) do
@@ -19,6 +17,7 @@ defmodule Sublist do
   @spec includes?([], any) :: false
   @spec includes?(a :: nonempty_list, b :: nonempty_list) :: boolean
   defp includes?([], _), do: false
+
   defp includes?([_head | tail] = a, b) do
     List.starts_with?(a, b) or includes?(tail, b)
   end
