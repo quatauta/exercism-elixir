@@ -14,7 +14,7 @@ defmodule BankAccount do
   Open the bank. Makes the account available.
   """
   @spec open_bank() :: account
-  def open_bank() do
+  def open_bank do
     {:ok, account} = GenServer.start_link(__MODULE__, {:open, 0})
     account
   end
