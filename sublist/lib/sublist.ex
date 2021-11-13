@@ -7,8 +7,6 @@ defmodule Sublist do
   @spec compare(list, []) :: :superlist
   @spec compare(a :: nonempty_list, b :: nonempty_list) :: atom
   def compare(a, a), do: :equal
-  def compare([], _), do: :sublist
-  def compare(_, []), do: :superlist
 
   def compare(a, b) do
     cond do
@@ -22,10 +20,6 @@ defmodule Sublist do
   @spec includes?(a :: nonempty_list, b :: nonempty_list) :: boolean
   defp includes?([], _), do: false
   defp includes?([head | tail], b) do
-    if List.starts_with?([head | tail], b) do
-      true
-    else
-      includes?(tail, b)
-    end
+    List.starts_with?([head | tail], b) or includes?(tail, b)
   end
 end
