@@ -15,7 +15,8 @@ test:
       - .cache
   artifacts:
     reports:
-      junit: '.cache/_build/test/lib/excercism_elixir/test-junit-report.xml'
+      cobertura: coverage.xml
+      junit: .cache/_build/test/lib/excercism_elixir/test-junit-report.xml
   coverage: '/^ +(\d+\.\d+%) \| Total$/'
   variables:
     MIX_ENV: test

@@ -7,5 +7,6 @@
 /doc
 _build
 cover/
+coverage.xml
 elixir_ls/
 erl_crash.dump
