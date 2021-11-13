@@ -12,16 +12,16 @@ defmodule Sublist do
 
   def compare(a, b) do
     cond do
-      Sublist.includes?(b, a) -> :sublist
-      Sublist.includes?(a, b) -> :superlist
+      includes?(b, a) -> :sublist
+      includes?(a, b) -> :superlist
       true -> :unequal
     end
   end
 
   @spec includes?([], any) :: false
   @spec includes?(a :: nonempty_list, b :: nonempty_list) :: boolean
-  def includes?([], _), do: false
-  def includes?([head | tail], b) do
+  defp includes?([], _), do: false
+  defp includes?([head | tail], b) do
     if List.starts_with?([head | tail], b) do
       true
     else
