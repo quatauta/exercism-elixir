@@ -14,8 +14,6 @@ defmodule Sublist do
     end
   end
 
-  @spec includes?([], any) :: false
-  @spec includes?(a :: nonempty_list, b :: nonempty_list) :: boolean
   defp includes?([], _), do: false
 
   defp includes?([_head | tail] = a, b) do
