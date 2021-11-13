@@ -10,28 +10,28 @@ defmodule StrainTest do
     assert Strain.keep([], &noop/1) == []
   end
 
-  @tag :pending
+  # @tag :pending
   test "keep everything" do
     assert Strain.keep([1, 2, 3], fn e -> e < 10 end) == [1, 2, 3]
   end
 
-  @tag :pending
+  # @tag :pending
   test "keep first and last" do
     assert Strain.keep([1, 2, 3], &is_odd?/1) == [1, 3]
   end
 
-  @tag :pending
+  # @tag :pending
   test "keep neither first nor last" do
     assert Strain.keep([1, 2, 3, 4, 5], &is_even?/1) == [2, 4]
   end
 
-  @tag :pending
+  # @tag :pending
   test "keep strings" do
     words = ~w(apple zebra banana zombies cherimoya zelot)
     assert Strain.keep(words, &String.starts_with?(&1, "z")) == ~w(zebra zombies zelot)
   end
 
-  @tag :pending
+  # @tag :pending
   test "keep arrays" do
     rows = [
       [1, 2, 3],
@@ -51,33 +51,33 @@ defmodule StrainTest do
            ]
   end
 
-  @tag :pending
+  # @tag :pending
   test "empty discard" do
     assert Strain.discard([], &noop/1) == []
   end
 
-  @tag :pending
+  # @tag :pending
   test "discard nothing" do
     assert Strain.discard([1, 2, 3], fn e -> e > 10 end) == [1, 2, 3]
   end
 
-  @tag :pending
+  # @tag :pending
   test "discard first and last" do
     assert Strain.discard([1, 2, 3], &is_odd?/1) == [2]
   end
 
-  @tag :pending
+  # @tag :pending
   test "discard neither first nor last" do
     assert Strain.discard([1, 2, 3, 4, 5], &is_even?/1) == [1, 3, 5]
   end
 
-  @tag :pending
+  # @tag :pending
   test "discard strings" do
     words = ~w(apple zebra banana zombies cherimoya zelot)
     assert Strain.discard(words, &String.starts_with?(&1, "z")) == ~w(apple banana cherimoya)
   end
 
-  @tag :pending
+  # @tag :pending
   test "discard arrays" do
     rows = [
       [1, 2, 3],

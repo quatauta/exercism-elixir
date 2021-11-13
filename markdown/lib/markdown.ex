@@ -18,7 +18,7 @@ defmodule Markdown do
   defp process(t) do
     cond do
       String.starts_with?(t, "#") -> t |> parse_header_md_level |> enclose_with_header_tag
-      String.starts_with?(t, "*") -> t |> parse_list_md_level
+      String.starts_with?(t, "*") -> parse_list_md_level(t)
       true -> t |> String.split() |> enclose_with_paragraph_tag
     end
   end

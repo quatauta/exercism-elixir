@@ -6,7 +6,7 @@ defmodule WordCount do
   """
   @spec count(String.t()) :: map
   def count(sentence) do
-    downcase(sentence) |> split() |> count_words()
+    sentence |> downcase() |> split() |> count_words()
   end
 
   defp downcase(sentence) do

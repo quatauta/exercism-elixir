@@ -37,7 +37,8 @@ defmodule RunLengthEncoder do
   def decode(""), do: ""
 
   def decode(string) do
-    Regex.scan(~r/(\d*)(\D)/i, string)
+    ~r/(\d*)(\D)/i
+    |> Regex.scan(string)
     |> Enum.map(fn e ->
       [_, n, s] = e
       decode_print(n, s)
