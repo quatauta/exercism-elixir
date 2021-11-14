@@ -1,4 +1,6 @@
 defmodule FreelancerRates do
+  @moduledoc false
+
   @spec daily_rate(number) :: float
   def daily_rate(hourly_rate) do
     8.0 * hourly_rate

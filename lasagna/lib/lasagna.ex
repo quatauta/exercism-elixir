@@ -1,4 +1,6 @@
 defmodule Lasagna do
+  @moduledoc false
+
   @spec expected_minutes_in_oven :: 40
   def expected_minutes_in_oven, do: 40
 

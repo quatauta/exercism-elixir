@@ -1,4 +1,6 @@
 defmodule NucleotideCount do
+  @moduledoc false
+
   @nucleotides [?A, ?C, ?G, ?T]
 
   @doc """

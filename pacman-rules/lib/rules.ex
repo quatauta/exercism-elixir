@@ -1,4 +1,6 @@
 defmodule Rules do
+  @moduledoc false
+
   @spec eat_ghost?(boolean(), boolean()) :: boolean()
   def eat_ghost?(power_pellet_active, touching_ghost) do
     power_pellet_active && touching_ghost
