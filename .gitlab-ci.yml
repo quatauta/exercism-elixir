@@ -24,6 +24,7 @@ test:
     - source .gitlab/ci.sh
     - ci_section setup-hex mix local.hex --force --if-missing
     - ci_section setup-deps mix deps.get
+    - ci_section test-stale mix test --stale
     - ci_section lint mix credo suggest --format=oneline --min-priority=high
     - ci_section lint-info mix credo suggest --format=oneline --mute-exit-status
     - ci_section test mix test --cover
