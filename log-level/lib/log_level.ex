@@ -2,6 +2,7 @@ defmodule LogLevel do
   @moduledoc false
 
   @spec to_label(integer, boolean) :: :trace | :debug | :info | :warning | :error | :fatal
+  # credo:disable-for-next-line Credo.Check.Refactor.CyclomaticComplexity
   def to_label(level, legacy?) do
     cond do
       level == 0 && !legacy? -> :trace
