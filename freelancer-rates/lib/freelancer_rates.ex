@@ -17,7 +17,7 @@ defmodule FreelancerRates do
     |> daily_rate
     |> Kernel.*(22)
     |> apply_discount(discount)
-    |> Float.ceil
+    |> Float.ceil()
     |> trunc
   end
 

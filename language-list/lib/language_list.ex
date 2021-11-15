@@ -13,18 +13,21 @@ defmodule LanguageList do
 
   @spec remove(maybe_improper_list) :: any
   def remove([]), do: []
+
   def remove([_ | tail]) do
     tail
   end
 
   @spec first(maybe_improper_list) :: any
   def first([]), do: nil
+
   def first([head | _]) do
     head
   end
 
   @spec count(list) :: non_neg_integer
   def count([]), do: 0
+
   def count([_ | tail]) do
     1 + count(tail)
   end

@@ -16,8 +16,9 @@ defmodule NucleotideCount do
   """
   @spec count(charlist(), char()) :: non_neg_integer()
   def count([], _), do: 0
+
   def count([head | tail], nucleotide) do
-    ((nuceotide?(head) && head == nucleotide) && 1 || 0) + count(tail, nucleotide)
+    ((nuceotide?(head) && head == nucleotide && 1) || 0) + count(tail, nucleotide)
   end
 
   @doc """
@@ -34,19 +35,19 @@ defmodule NucleotideCount do
   defp histogram_count(strand) do
     @nucleotides
     |> Enum.map(fn nucleotide -> {nucleotide, count(strand, nucleotide)} end)
-    |> Map.new
+    |> Map.new()
   end
 
   defp histogram_reduce(strand) do
-    init = @nucleotides |> Enum.map(fn n -> {n, 0} end) |> Map.new
-    Enum.reduce(strand, init,
-      fn char, acc ->
-        if nuceotide?(char) do
-          Map.update(acc, char, 0, fn count -> count + 1 end)
-        else
-          acc
-        end
-      end)
+    init = @nucleotides |> Enum.map(fn n -> {n, 0} end) |> Map.new()
+
+    Enum.reduce(strand, init, fn char, acc ->
+      if nuceotide?(char) do
+        Map.update(acc, char, 0, fn count -> count + 1 end)
+      else
+        acc
+      end
+    end)
   end
 
   defp nuceotide?(char) when char in @nucleotides, do: true
