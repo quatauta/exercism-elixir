@@ -38,18 +38,6 @@ defmodule NucleotideCount do
     |> Map.new()
   end
 
-  defp histogram_reduce(strand) do
-    init = @nucleotides |> Enum.map(fn n -> {n, 0} end) |> Map.new()
-
-    Enum.reduce(strand, init, fn char, acc ->
-      if nuceotide?(char) do
-        Map.update(acc, char, 0, fn count -> count + 1 end)
-      else
-        acc
-      end
-    end)
-  end
-
   defp nuceotide?(char) when char in @nucleotides, do: true
   defp nuceotide?(_), do: false
 end
