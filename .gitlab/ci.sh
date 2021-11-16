@@ -15,3 +15,12 @@ ci_section() {
     "${@}"
     ci_end "${SECTION}"
 }
+
+ci_check_test_helpers() {
+    if grep -nr '^[^#]*exclude' ./*/test/test_helper.exs ; then
+        echo "Some test_helper.exs exclude tests. Please use ./test_helper.exs"
+        return 1
+    else
+        return 0
+    fi
+}

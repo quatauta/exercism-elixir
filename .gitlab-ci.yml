@@ -24,8 +24,9 @@ test:
     - source .gitlab/ci.sh
     - ci_section setup-hex mix local.hex --force --if-missing
     - ci_section setup-deps mix deps.get
-    - ci_section test-stale mix test --stale
-    - ci_section lint mix credo suggest --format=oneline --min-priority=high
-    - ci_section lint-info mix credo suggest --format=oneline --mute-exit-status
+    - ci_section lint-test-helpers ci_check_test_helpers
     - ci_section test mix test --cover
-    - ci_section junit-for-gitlab .gitlab/junit-for-gitlab
+    - ci_section test-junit-for-gitlab .gitlab/junit-for-gitlab
+    - ci_section lint-format mix format --check-formatted
+    - ci_section lint-credo-high mix credo suggest --format=oneline --min-priority=high
+    - ci_section lint-credo-info mix credo suggest --format=oneline --mute-exit-status
