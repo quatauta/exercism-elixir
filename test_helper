@@ -1,0 +1,4 @@
+#! /usr/bin/env elixir
+
+Path.wildcard("*/test/test_helper.exs")
+|> Enum.each(fn helper -> File.cp!("./test_helper.exs", helper, fn _, _ -> true end) end)
