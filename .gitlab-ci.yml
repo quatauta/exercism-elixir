@@ -23,6 +23,7 @@ test:
   script:
     - source .gitlab/ci.sh
     - ci_section setup-hex mix local.hex --force --if-missing
+    - ci_section setup-rebar mix local.rebar --force
     - ci_section setup-deps mix deps.get
     - ci_section lint-test-helpers ci_check_test_helpers
     - ci_section test mix test --cover
