@@ -1,0 +1,21 @@
+{
+  "blurb": "Learn about the Enum module by preparing your fashion boutique for the big annual sale.",
+  "authors": [
+    "angelikatyborska"
+  ],
+  "contributors": [
+    "neenjaw"
+  ],
+  "files": {
+    "solution": [
+      "lib/boutique_inventory.ex"
+    ],
+    "test": [
+      "test/boutique_inventory_test.exs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.ex"
+    ]
+  },
+  "language_versions": ">=1.10"
+}
