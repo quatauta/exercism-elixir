@@ -17,8 +17,7 @@ defmodule HighSchoolSweetheart do
     full_name
     |> String.trim()
     |> String.split()
-    |> Enum.map(&initial/1)
-    |> Enum.join(" ")
+    |> Enum.map_join(" ", &initial/1)
   end
 
   @spec pair(String.t(), String.t()) :: String.t()

@@ -12,7 +12,7 @@ defmodule Markdown do
   """
   @spec parse(String.t()) :: String.t()
   def parse(markdown) do
-    markdown |> String.split("\n") |> Enum.map(fn t -> process(t) end) |> Enum.join() |> patch
+    markdown |> String.split("\n") |> Enum.map_join(fn t -> process(t) end) |> patch
   end
 
   defp process(t) do
@@ -42,7 +42,7 @@ defmodule Markdown do
   end
 
   defp join_words_with_tags(words) do
-    words |> Enum.map(fn word -> replace_md_with_tag(word) end) |> Enum.join(" ")
+    Enum.map_join(words, " ", fn word -> replace_md_with_tag(word) end)
   end
 
   defp replace_md_with_tag(word) do

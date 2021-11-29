@@ -39,11 +39,10 @@ defmodule RunLengthEncoder do
   def decode(string) do
     ~r/(\d*)(\D)/i
     |> Regex.scan(string)
-    |> Enum.map(fn e ->
+    |> Enum.map_join(fn e ->
       [_, n, s] = e
       decode_print(n, s)
     end)
-    |> Enum.join()
   end
 
   defp decode_print("", string), do: string
