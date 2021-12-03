@@ -30,7 +30,7 @@ defmodule RPG do
   end
 
   defimpl Edible, for: ManaPotion do
-    def eat(%{strength: strength}, character) do
+    def eat(%ManaPotion{strength: strength}, character) do
       {%EmptyBottle{}, %{character | mana: character.mana + strength}}
     end
   end
