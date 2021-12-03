@@ -32,18 +32,25 @@ defmodule RPG do
   end
 
   defprotocol Edible do
+    @spec eat(edible :: LoafOfBread | ManaPotion | Poison, character :: Character) :: {nil | EmptyBottle, Character}
     def eat(edible, character)
   end
 
   defimpl Edible, for: LoafOfBread do
-    def eat(%LoafOfBread{}, character) do
+    def eat(%LoafOfBread{}, %Character{} = character) do
       {nil, %{character | health: character.health + 5}}
     end
   end
 
   defimpl Edible, for: ManaPotion do
-    def eat(%ManaPotion{strength: strength}, character) do
+    def eat(%ManaPotion{strength: strength}, %Character{} = character) do
       {%EmptyBottle{}, %{character | mana: character.mana + strength}}
+    end
+  end
+
+  defimpl Edible, for: [Poison, Character] do
+    def eat(%Poison{}, %Character{} = character) do
+      {%EmptyBottle{}, %{character | health: 0}}
     end
   end
 end
