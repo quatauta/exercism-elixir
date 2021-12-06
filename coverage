@@ -1,0 +1,53 @@
+#!/bin/bash
+
+elixir_mix_test_coverage() {
+  local _COVER_DIR=$1
+  local _FORMAT='%9.2f%% | %s\n'
+  local _RATIO
+
+  echo "Percentage | Module"
+  echo "-----------|--------------------------"
+  elixir_mix_test_coverage_per_module "${_COVER_DIR}" |
+  xargs -r -n2 printf "${_FORMAT}" |
+  sort -bg
+  echo "-----------|--------------------------"
+  _RATIO="$(elixir_mix_test_coverage_total "${_COVER_DIR}")"
+  printf "${_FORMAT}" "${_RATIO}" "Total"
+}
+
+elixir_mix_test_coverage_per_module() {
+  local _COVER_DIR=$1
+  local _HITS
+  local _MISS
+  local _FILE
+  local _MODULE
+
+  for _FILE in "${_COVER_DIR}"/*.html ; do
+    _HITS="$(grep -F 'class="hit"' "${_FILE}" | wc -l)"
+    [[ "${_HITS}" -lt 1 ]] && _HITS=1
+    _MISS="$(grep -F 'class="miss"' "${_FILE}" | wc -l)"
+    _RATIO="$(elixir_mix_test_coverage_ratio "${_HITS}" "${_MISS}")"
+    _MODULE="$(basename "${_FILE}" .html)"
+    _MODULE="${_MODULE#Elixir.}"
+    echo "${_RATIO}" "${_MODULE}"
+  done
+}
+
+elixir_mix_test_coverage_ratio() {
+  local _HITS=$1
+  local _MISS=$2
+  echo "scale=4; 100.0 * (${_HITS} - ${_MISS}) / ${_HITS}" | bc
+}
+
+elixir_mix_test_coverage_total() {
+  local _COVER_DIR=$1
+  local _HITS
+  local _MISS
+
+  _HITS="$(grep -F 'class="hit"' "${_COVER_DIR}"/*.html | wc -l)"
+  _MISS="$(grep -F 'class="miss"' "${_COVER_DIR}"/*.html | wc -l)"
+
+  elixir_mix_test_coverage_ratio "${_HITS}" "${_MISS}"
+}
+
+elixir_mix_test_coverage "${1:-.cache/cover}"

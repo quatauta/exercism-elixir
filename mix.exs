@@ -12,7 +12,7 @@ defmodule ExercismElixir.MixProject do
       config_path: "config.exs",
       deps_path: ".cache/deps",
       elixirc_paths: Path.wildcard("*/lib"),
-      test_coverage: [output: ".cache/cover", tool: CoberturaCover],
+      test_coverage: [output: ".cache/cover", html_output: ".cache/cover", tool: CoberturaCover],
       test_paths: Path.wildcard("*/test")
     ]
   end
