@@ -17,7 +17,7 @@ test:
     reports:
       cobertura: coverage.xml
       junit: .cache/_build/test/lib/excercism_elixir/test-junit-report.xml
-  coverage: '/^ +(\d+\.\d+%) \| Total$/'
+  coverage: '/^ *Line total: +(\d+\.\d+%) *$/'
   variables:
     MIX_ENV: test
   script:
@@ -28,7 +28,6 @@ test:
     - ci_section setup-deps mix deps.get
     - ci_section lint-test-helpers ci_check_test_helpers
     - ci_section test mix test --cover
-    - ci_section coverage ./coverage
     - ci_section test-junit-for-gitlab .gitlab/junit-for-gitlab
     - ci_section lint-format mix format --check-formatted
     - ci_section lint-credo-high mix credo suggest --format=oneline --min-priority=high
