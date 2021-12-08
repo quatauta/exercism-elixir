@@ -1,10 +1,10 @@
 defmodule Newsletter do
   @moduledoc false
 
-  @spec read_emails(String.t()) :: [String.t()]
+  @spec read_emails(Path.t()) :: [String.t()]
   def read_emails(path) do
     try do
-      path |> File.stream!([:read], :line) |> Stream.map(&String.trim/1) |> Enum.to_list()
+      path |> File.stream!() |> Stream.map(&String.trim/1) |> Enum.to_list()
     rescue
       _ -> []
     end
