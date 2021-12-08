@@ -13,10 +13,10 @@ defmodule RPNCalculatorInspection do
           map()
   def await_reliability_check_result(%{pid: pid, input: input}, results) do
     receive do
-      {:EXIT, ^pid, :normal} -> Map.put_new(results, input, :ok)
-      {:EXIT, ^pid, _} -> Map.put_new(results, input, :error)
+      {:EXIT, ^pid, :normal} -> Map.put(results, input, :ok)
+      {:EXIT, ^pid, _} -> Map.put(results, input, :error)
     after
-      200 -> Map.put_new(results, input, :timeout)
+      200 -> Map.put(results, input, :timeout)
     end
   end
 
@@ -24,21 +24,16 @@ defmodule RPNCalculatorInspection do
   def reliability_check(calculator, inputs) do
     previous_exit_trap = Process.flag(:trap_exit, true)
 
-    results =
-      inputs
-      |> Enum.map(fn input -> start_reliability_check(calculator, input) end)
-      |> Enum.reduce(%{}, fn %{input: _, pid: _} = check, results ->
-        await_reliability_check_result(check, results)
-      end)
-
-    Process.flag(:trap_exit, previous_exit_trap)
-    results
+    inputs
+    |> Enum.map(&start_reliability_check(calculator, &1))
+    |> Enum.reduce(%{}, &await_reliability_check_result/2)
+    |> tap(fn _ -> Process.flag(:trap_exit, previous_exit_trap) end)
   end
 
   @spec correctness_check(calculator(), inputs :: list()) :: results :: list()
   def correctness_check(calculator, inputs) do
     inputs
-    |> Enum.map(fn input -> Task.async(fn -> calculator.(input) end) end)
-    |> Enum.map(fn task -> Task.await(task, 100) end)
+    |> Enum.map(&Task.async(fn -> calculator.(&1) end))
+    |> Enum.map(&Task.await(&1, 100))
   end
 end
