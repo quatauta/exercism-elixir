@@ -18,6 +18,7 @@ test:
       cobertura: coverage.xml
       junit: .cache/_build/test/lib/excercism_elixir/test-junit-report.xml
   coverage: '/^ *Line total: +(\d+\.\d+%) *$/'
+  interruptible: true
   variables:
     MIX_ENV: test
   script:
