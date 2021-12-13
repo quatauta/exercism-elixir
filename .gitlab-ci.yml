@@ -7,9 +7,57 @@ include:
   - template: 'Security/Secret-Detection.gitlab-ci.yml'
   - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
 
+stages:
+  - variables
+  - build
+  - test
+
+set_variables:
+  stage: variables
+  script:
+    - ELIXIR_VERSION="$(awk -vFS='[ -]' '/^elixir/ { print $2 }' .tool-versions)"
+    - ELIXIR_IMAGE="${CI_REGISTRY_IMAGE}/elixir:${ELIXIR_VERSION}-alpine-bash"
+    - echo "ELIXIR_VERSION=${ELIXIR_VERSION}" >> variables.env
+    - echo "ELIXIR_IMAGE=${ELIXIR_IMAGE}" >> variables.env
+  artifacts:
+    reports:
+      dotenv: variables.env
+
+container_image:
+  stage: build
+  needs:
+    - job: set_variables
+      artifacts: true
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --build-arg ELIXIR_VERSION="${ELIXIR_VERSION}"
+      --cache=true
+      --context="${CI_PROJECT_DIR}"
+      --dockerfile="${CI_PROJECT_DIR}/Dockerfile"
+      --destination="${ELIXIR_IMAGE}"
+  interruptible: true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - .gitlab-ci.yml
+        - .tool-versions
+        - Dockerfile
+      allow_failure: true
+
 test:
   stage: test
-  image: elixir:alpine
+  needs:
+    - job: set_variables
+      artifacts: true
+    - job: container_image
+      optional: true
+  image: ${ELIXIR_IMAGE}
   cache:
     paths:
       - .cache
@@ -22,7 +70,6 @@ test:
   variables:
     MIX_ENV: test
   script:
-    - apk add bash
     - source .gitlab/ci.sh
     - ci_section setup-hex mix local.hex --force --if-missing
     - ci_section setup-rebar mix local.rebar --force
