@@ -59,6 +59,10 @@ test:
       optional: true
   image: ${ELIXIR_IMAGE}
   cache:
+    key:
+      files:
+        - .tool-versions
+        - mix.lock
     paths:
       - .cache
   artifacts:
