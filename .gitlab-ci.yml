@@ -51,8 +51,9 @@ container_scanning:
   needs:
     - job: set_variables
       artifacts: true
-  variables:
-    DOCKER_IMAGE: ${CI_REGISTRY_IMAGE}/elixir:1.13.1-alpine-bash
+  script:
+    - export DOCKER_IMAGE="${ELIXIR_IMAGE}"
+    - gtcs scan
 
 test:
   stage: test
