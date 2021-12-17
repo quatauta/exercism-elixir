@@ -7,15 +7,11 @@ defmodule SumOfMultiples do
   @spec to(non_neg_integer, [non_neg_integer]) :: non_neg_integer
   def to(limit, factors) do
     factors
-    |> Enum.map(&(&1 |> multiples(limit) |> Enum.to_list()))
-    |> List.flatten()
+    |> Enum.filter(&(&1 > 0))
+    |> Enum.map(&(&1..(limit - 1)//&1))
+    |> Enum.map(&MapSet.new/1)
+    |> Enum.reduce(MapSet.new(), &MapSet.union/2)
     |> MapSet.new()
     |> Enum.sum()
-  end
-
-  defp multiples(0, _), do: [0]
-
-  defp multiples(factor, limit) do
-    factor..(limit - 1)//factor
   end
 end
