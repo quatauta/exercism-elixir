@@ -1,11 +1,13 @@
 ---
 include:
-  - template: 'Jobs/Code-Intelligence.gitlab-ci.yml'
-  - template: 'Security/Dependency-Scanning.gitlab-ci.yml'
-  - template: 'Security/License-Scanning.gitlab-ci.yml'
-  - template: 'Security/SAST.gitlab-ci.yml'
-  - template: 'Security/Secret-Detection.gitlab-ci.yml'
-  - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
+  - template: Jobs/Code-Intelligence.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/Secure-Binaries.gitlab-ci.yml
+  - template: Workflows/MergeRequest-Pipelines.gitlab-ci.yml
 
 stages:
   - variables
