@@ -57,7 +57,7 @@ container_scanning:
     - job: set_variables
       artifacts: true
   variables:
-    DOCKER_IMAGE: ${ELIXIR_IMAGE}
+    DOCKER_IMAGE: ${CI_REGISTRY_IMAGE}/elixir:1.13.1-alpine-bash
 
 test:
   stage: test
