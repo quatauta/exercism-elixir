@@ -54,9 +54,7 @@ container_image:
       allow_failure: true
 
 container_scanning:
-  stage: test
   needs:
-    - job: container_image
     - job: set_variables
       artifacts: true
   variables:
