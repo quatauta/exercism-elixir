@@ -28,8 +28,11 @@ set_variables:
 
 container_scanning:
   needs:
+    - job: container_image
     - job: set_variables
       artifacts: true
+  variables:
+    DOCKER_IMAGE: ${DOCKER_IMAGE}
 
 container_image:
   stage: build
