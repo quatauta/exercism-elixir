@@ -47,14 +47,6 @@ container_image:
         - Dockerfile
       allow_failure: true
 
-container_scanning:
-  needs:
-    - job: set_variables
-      artifacts: true
-  script:
-    - export DOCKER_IMAGE="${ELIXIR_IMAGE}"
-    - gtcs scan
-
 test:
   stage: test
   needs:
