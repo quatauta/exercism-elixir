@@ -9,13 +9,8 @@ include:
   - template: Security/Secure-Binaries.gitlab-ci.yml
   - template: Workflows/MergeRequest-Pipelines.gitlab-ci.yml
 
-stages:
-  - variables
-  - build
-  - test
-
 set_variables:
-  stage: variables
+  stage: .pre
   script:
     - ELIXIR_VERSION="$(awk -vFS='[ -]' '/^elixir/ { print $2 }' .tool-versions)"
     - ELIXIR_IMAGE="${CI_REGISTRY_IMAGE}/elixir:${ELIXIR_VERSION}-alpine-bash"
