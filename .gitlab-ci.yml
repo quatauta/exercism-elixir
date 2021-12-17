@@ -21,7 +21,6 @@ set_variables:
     - ELIXIR_IMAGE="${CI_REGISTRY_IMAGE}/elixir:${ELIXIR_VERSION}-alpine-bash"
     - echo "ELIXIR_VERSION=${ELIXIR_VERSION}" >> variables.env
     - echo "ELIXIR_IMAGE=${ELIXIR_IMAGE}" >> variables.env
-    - echo "DOCKER_IMAGE=${ELIXIR_IMAGE}" >> variables.env
   artifacts:
     reports:
       dotenv: variables.env
@@ -58,7 +57,7 @@ container_scanning:
     - job: set_variables
       artifacts: true
   variables:
-    DOCKER_IMAGE: ${DOCKER_IMAGE}
+    DOCKER_IMAGE: ${ELIXIR_IMAGE}
 
 test:
   stage: test
