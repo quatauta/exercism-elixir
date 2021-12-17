@@ -16,6 +16,19 @@ set_variables:
     - ELIXIR_IMAGE="${CI_REGISTRY_IMAGE}/elixir:${ELIXIR_VERSION}-alpine-bash"
     - echo "ELIXIR_VERSION=${ELIXIR_VERSION}" >> variables.env
     - echo "ELIXIR_IMAGE=${ELIXIR_IMAGE}" >> variables.env
+    - |
+      # from https://gitlab.com/gitlab-org/gitlab-foss/blob/master/lib/gitlab/ci/templates/Jobs/Build.gitlab-ci.yml
+      if [[ -z "$CI_COMMIT_TAG" ]]; then
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_SHA}
+      else
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_TAG}
+      fi
+    - echo "CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY}" >> variables.env
+    - echo "CI_APPLICATION_TAG=${CI_APPLICATION_TAG}" >> variables.env
+    - echo "DOCKER_IMAGE=${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG}"
+
   artifacts:
     reports:
       dotenv: variables.env
@@ -38,6 +51,7 @@ container_image:
       --context="${CI_PROJECT_DIR}"
       --dockerfile="${CI_PROJECT_DIR}/Dockerfile"
       --destination="${ELIXIR_IMAGE}"
+      --destination="${DOCKER_IMAGE}"
   interruptible: true
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -46,6 +60,7 @@ container_image:
         - .tool-versions
         - Dockerfile
       allow_failure: true
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 test:
   stage: test
