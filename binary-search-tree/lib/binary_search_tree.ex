@@ -27,5 +27,7 @@ defmodule BinarySearchTree do
   """
   @spec in_order(bst_node) :: [any]
   def in_order(nil), do: []
-  def in_order(%{data: data, left: left, right: right}), do: in_order(left) ++ [data] ++ in_order(right)
+
+  def in_order(%{data: data, left: left, right: right}),
+    do: in_order(left) ++ [data] ++ in_order(right)
 end
