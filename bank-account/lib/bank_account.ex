@@ -1,9 +1,9 @@
 defmodule BankAccount do
-  use GenServer
-
   @moduledoc """
   A bank account that supports access from multiple processes.
   """
+
+  use GenServer
 
   @typedoc """
   An account handle.

@@ -2,7 +2,7 @@ defmodule TakeANumber do
   @moduledoc false
 
   @spec start :: pid
-  def start() do
+  def start do
     spawn(fn -> loop(0) end)
   end
 

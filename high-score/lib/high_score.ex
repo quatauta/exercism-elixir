@@ -3,8 +3,8 @@ defmodule HighScore do
 
   @initial_score 0
 
-  @spec new :: %{}
-  def new() do
+  @spec new() :: %{}
+  def new do
     %{}
   end
 

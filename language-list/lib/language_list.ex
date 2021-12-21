@@ -1,8 +1,8 @@
 defmodule LanguageList do
   @moduledoc false
 
-  @spec new :: []
-  def new() do
+  @spec new() :: []
+  def new do
     []
   end
 

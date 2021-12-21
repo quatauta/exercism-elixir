@@ -7,7 +7,7 @@ defmodule RemoteControlCar do
   @type t :: %RemoteControlCar{}
 
   @spec new :: t()
-  def new(), do: new("none")
+  def new, do: new("none")
 
   @spec new(nickname :: String.t()) :: RemoteControlCar.t()
   def new(nickname), do: %RemoteControlCar{nickname: nickname}

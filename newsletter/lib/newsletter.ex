@@ -3,11 +3,9 @@ defmodule Newsletter do
 
   @spec read_emails(Path.t()) :: [String.t()]
   def read_emails(path) do
-    try do
-      path |> File.stream!() |> Stream.map(&String.trim/1) |> Enum.to_list()
-    rescue
-      _ -> []
-    end
+    path |> File.stream!() |> Stream.map(&String.trim/1) |> Enum.to_list()
+  rescue
+    _ -> []
   end
 
   @spec open_log(path :: String.t()) :: pid
