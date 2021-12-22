@@ -1,4 +1,6 @@
 defmodule House do
+  @moduledoc false
+
   @phrases Enum.reverse([
              # This is
              "the horse and the hound and the horn that belonged to",
