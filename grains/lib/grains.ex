@@ -1,4 +1,6 @@
 defmodule Grains do
+  @moduledoc false
+
   @doc """
   Calculate two to the power of the input minus one.
   """
