@@ -5,6 +5,7 @@ defmodule NeedForSpeed do
   import IO, only: [puts: 1]
   import IO.ANSI, except: [color: 1]
   alias NeedForSpeed.Race
+  # credo:disable-for-next-line Credo.Check.Readability.AliasAs
   alias NeedForSpeed.RemoteControlCar, as: Car
 
   # Do not edit the code below.
