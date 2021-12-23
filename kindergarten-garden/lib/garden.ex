@@ -1,4 +1,6 @@
 defmodule Garden do
+  @moduledoc false
+
   @doc """
     Accepts a string representing the arrangement of cups on a windowsill and a
     list with names of students in the class. The student names list does not
