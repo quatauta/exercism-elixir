@@ -2,6 +2,20 @@ defmodule Garden do
   @moduledoc false
 
   @plants %{"C" => :clover, "G" => :grass, "R" => :radishes, "V" => :violets}
+  @students [
+    :alice,
+    :bob,
+    :charlie,
+    :david,
+    :eve,
+    :fred,
+    :ginny,
+    :harriet,
+    :ileana,
+    :joseph,
+    :kincaid,
+    :larry
+  ]
 
   @doc """
     Accepts a string representing the arrangement of cups on a windowsill and a
@@ -13,23 +27,7 @@ defmodule Garden do
   """
 
   @spec info(String.t(), list) :: map
-  def info(
-        info_string,
-        student_names \\ [
-          :alice,
-          :bob,
-          :charlie,
-          :david,
-          :eve,
-          :fred,
-          :ginny,
-          :harriet,
-          :ileana,
-          :joseph,
-          :kincaid,
-          :larry
-        ]
-      ) do
+  def info(info_string, student_names \\ @students) do
     garden = String.split(info_string)
 
     student_names
@@ -39,16 +37,11 @@ defmodule Garden do
   end
 
   defp plants_at(garden, index) do
-    a = garden |> Enum.at(0) |> String.at(index * 2)
-    b = garden |> Enum.at(0) |> String.at(index * 2 + 1)
-    c = garden |> Enum.at(1) |> String.at(index * 2)
-    d = garden |> Enum.at(1) |> String.at(index * 2 + 1)
-
     [
-      Map.get(@plants, a),
-      Map.get(@plants, b),
-      Map.get(@plants, c),
-      Map.get(@plants, d)
+      Map.get(@plants, String.at(Enum.at(garden, 0), index * 2)),
+      Map.get(@plants, String.at(Enum.at(garden, 0), index * 2 + 1)),
+      Map.get(@plants, String.at(Enum.at(garden, 1), index * 2)),
+      Map.get(@plants, String.at(Enum.at(garden, 1), index * 2 + 1))
     ]
     |> Enum.filter(& &1)
     |> List.to_tuple()
