@@ -1,0 +1,29 @@
+{
+  "blurb": "Given a diagram, determine which plants each child in the kindergarten class is responsible for.",
+  "authors": [
+    "devonestes"
+  ],
+  "contributors": [
+    "angelikatyborska",
+    "Cohen-Carlisle",
+    "jwworth",
+    "lpil",
+    "nathanielknight",
+    "neenjaw",
+    "parkerl",
+    "sotojuan"
+  ],
+  "files": {
+    "solution": [
+      "lib/garden.ex"
+    ],
+    "test": [
+      "test/garden_test.exs"
+    ],
+    "example": [
+      ".meta/example.ex"
+    ]
+  },
+  "source": "Random musings during airplane trip.",
+  "source_url": "http://jumpstartlab.com"
+}
