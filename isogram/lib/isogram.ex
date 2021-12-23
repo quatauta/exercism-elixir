@@ -1,4 +1,6 @@
 defmodule Isogram do
+  @moduledoc false
+
   @doc """
   Determines if a word or sentence is an isogram
   """
