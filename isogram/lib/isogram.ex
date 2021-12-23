@@ -4,5 +4,11 @@ defmodule Isogram do
   """
   @spec isogram?(String.t()) :: boolean
   def isogram?(sentence) do
+    sentence
+    |> String.downcase()
+    |> String.replace(~r/[[:space:][:punct:]]/, "")
+    |> String.graphemes()
+    |> Enum.frequencies()
+    |> Enum.all?(fn {_, f} -> f == 1 end)
   end
 end
