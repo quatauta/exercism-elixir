@@ -9,7 +9,7 @@ defmodule MatchingBrackets do
     helper(str, [])
   end
 
-  defp helper(<<>>, brackets), do: Enum.empty?(brackets)
+  defp helper("", brackets), do: Enum.empty?(brackets)
 
   defp helper(<<?(, rest::binary>>, brackets), do: helper(rest, ["(" | brackets])
   defp helper(<<?{, rest::binary>>, brackets), do: helper(rest, ["{" | brackets])
