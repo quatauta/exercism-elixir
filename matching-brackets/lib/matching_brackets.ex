@@ -6,22 +6,22 @@ defmodule MatchingBrackets do
   """
   @spec check_brackets(String.t()) :: boolean
   def check_brackets(str) do
-    helper(str, [])
+    check(str, [])
   end
 
-  defp helper("", brackets), do: Enum.empty?(brackets)
+  defp check("", brackets), do: Enum.empty?(brackets)
 
-  defp helper(<<?(, rest::binary>>, brackets), do: helper(rest, ["(" | brackets])
-  defp helper(<<?{, rest::binary>>, brackets), do: helper(rest, ["{" | brackets])
-  defp helper(<<?[, rest::binary>>, brackets), do: helper(rest, ["[" | brackets])
+  defp check("(" <> tail, brackets), do: check(tail, ["(" | brackets])
+  defp check("{" <> tail, brackets), do: check(tail, ["{" | brackets])
+  defp check("[" <> tail, brackets), do: check(tail, ["[" | brackets])
 
-  defp helper(<<?), rest::binary>>, ["(" | brackets]), do: helper(rest, brackets)
-  defp helper(<<?}, rest::binary>>, ["{" | brackets]), do: helper(rest, brackets)
-  defp helper(<<?], rest::binary>>, ["[" | brackets]), do: helper(rest, brackets)
+  defp check(")" <> tail, ["(" | brackets]), do: check(tail, brackets)
+  defp check("}" <> tail, ["{" | brackets]), do: check(tail, brackets)
+  defp check("]" <> tail, ["[" | brackets]), do: check(tail, brackets)
 
-  defp helper(<<?), _::binary>>, _), do: false
-  defp helper(<<?}, _::binary>>, _), do: false
-  defp helper(<<?], _::binary>>, _), do: false
+  defp check(")" <> _, _), do: false
+  defp check("}" <> _, _), do: false
+  defp check("]" <> _, _), do: false
 
-  defp helper(<<_, rest::binary>>, brackets), do: helper(rest, brackets)
+  defp check(<<_, tail::binary>>, brackets), do: check(tail, brackets)
 end
