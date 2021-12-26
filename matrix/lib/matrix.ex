@@ -21,7 +21,7 @@ defmodule Matrix do
   """
   @spec to_string(matrix :: Matrix.t()) :: String.t()
   def to_string(matrix) do
-    matrix |> rows() |> Enum.map_join("\n", &(Enum.join(&1, " ")))
+    matrix |> rows() |> Enum.map_join("\n", &Enum.join(&1, " "))
   end
 
   @doc """
