@@ -10,7 +10,6 @@ defmodule Matrix do
   @spec from_string(input :: String.t()) :: Matrix.t()
   def from_string(input) do
     input
-    |> String.trim()
     |> String.split("\n")
     |> Enum.map(fn row -> row |> String.split() |> Enum.map(&String.to_integer/1) end)
   end
