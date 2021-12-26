@@ -1,4 +1,6 @@
 defmodule Matrix do
+  @moduledoc false
+
   defstruct matrix: nil
 
   @doc """
