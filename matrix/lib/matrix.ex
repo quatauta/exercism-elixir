@@ -45,12 +45,8 @@ defmodule Matrix do
   """
   @spec columns(matrix :: %Matrix{}) :: list(list(integer))
   def columns(matrix) do
-    count = column_length(matrix)
+    count = matrix |> rows() |> List.first() |> length()
     Enum.map(1..count, &(column(matrix, &1)))
-  end
-
-  defp column_length(matrix) do
-    matrix |> rows() |> List.first() |> length()
   end
 
   @doc """
