@@ -46,7 +46,7 @@ defmodule Matrix do
   @spec columns(matrix :: Matrix.t()) :: list(list(integer))
   def columns(matrix) do
     count = matrix |> rows() |> List.first() |> length()
-    Enum.map(1..count, &(column(matrix, &1)))
+    Enum.map(1..count, &column(matrix, &1))
   end
 
   @doc """
