@@ -54,6 +54,6 @@ defmodule Matrix do
   """
   @spec column(matrix :: Matrix.t(), index :: integer) :: list(integer)
   def column(matrix, index) do
-    Enum.map(matrix, &(Enum.at(&1, index - 1)))
+    Enum.map(matrix, &Enum.at(&1, index - 1))
   end
 end
