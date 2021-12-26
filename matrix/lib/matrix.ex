@@ -1,7 +1,7 @@
 defmodule Matrix do
   @moduledoc false
 
-  @type t :: [[integer()]]
+  @type t :: list(list(integer()))
 
   @doc """
   Convert an `input` string, with rows separated by newlines and values
