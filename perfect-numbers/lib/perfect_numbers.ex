@@ -1,4 +1,6 @@
 defmodule PerfectNumbers do
+  @moduledoc false
+
   @doc """
   Determine the aliquot sum of the given `number`, by summing all the factors
   of `number`, aside from `number` itself.
