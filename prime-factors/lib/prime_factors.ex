@@ -1,4 +1,6 @@
 defmodule PrimeFactors do
+  @moduledoc false
+
   @doc """
   Compute the prime factors for 'number'.
 
