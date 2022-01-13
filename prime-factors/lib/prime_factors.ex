@@ -16,6 +16,7 @@ defmodule PrimeFactors do
 
   defp factors(1, _), do: []
   defp factors(n, divisor) when divisor * divisor > n, do: [n]
+
   defp factors(n, divisor) do
     if rem(n, divisor) == 0 do
       [divisor | factors(div(n, divisor), divisor)]
