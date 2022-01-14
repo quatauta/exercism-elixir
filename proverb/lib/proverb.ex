@@ -1,4 +1,6 @@
 defmodule Proverb do
+  @moduledoc false
+
   @doc """
   Generate a proverb from a list of strings.
   """
