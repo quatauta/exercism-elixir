@@ -1,4 +1,6 @@
 defmodule ResistorColorTrio do
+  @moduledoc false
+
   @doc """
   Calculate the resistance value in ohm or kiloohm from resistor colors
   """
