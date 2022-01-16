@@ -1,4 +1,6 @@
 defmodule Say do
+  @moduledoc false
+
   @doc """
   Translate a positive integer into English.
   """
