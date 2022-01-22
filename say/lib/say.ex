@@ -9,7 +9,16 @@ defmodule Say do
     do: {:error, "number is out of range"}
 
   def in_english(number) do
-    words = number |> tripples() |> Enum.map(&tripple_in_english/1) |> Enum.zip([nil, "thousand", "million", "billion"]) |> Enum.reverse() |> Enum.map(&scaled/1) |> Enum.reject(&is_nil/1) |> Enum.join(" ")
+    words =
+      number
+      |> reverse_tripples()
+      |> Enum.map(&tripple_in_english/1)
+      |> Enum.zip([nil, "thousand", "million", "billion"])
+      |> Enum.reverse()
+      |> Enum.map(&scaled/1)
+      |> Enum.reject(&is_nil/1)
+      |> Enum.join(" ")
+
     {:ok, words}
   end
 
@@ -19,7 +28,7 @@ defmodule Say do
   defp scaled({number, nil}), do: "#{number}"
   defp scaled({number, word}), do: "#{number} #{word}"
 
-  defp tripples(number) do
+  defp reverse_tripples(number) do
     number
     |> Integer.digits()
     |> Enum.reverse()
@@ -29,8 +38,8 @@ defmodule Say do
 
   defp tripple_in_english([hundreds, tens, ones]) do
     [hundreds_in_english(hundreds), tens_in_english(tens, ones)]
-    |> Enum.reject(&is_nil/1)
     |> Enum.join(" ")
+    |> String.trim()
   end
 
   defp ones_in_english(nil), do: nil
