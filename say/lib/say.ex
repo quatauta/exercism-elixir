@@ -9,36 +9,15 @@ defmodule Say do
     do: {:error, "number is out of range"}
 
   def in_english(number) do
-    tripples =
-      number
-      |> tripples()
-      |> Enum.map(&tripple_in_english/1)
-      |> Enum.map(&((&1 != [] && &1) || nil))
-
-    hundreds = Enum.at(tripples, 0)
-    tausands = Enum.at(tripples, 1)
-    millions = Enum.at(tripples, 2)
-    billions = Enum.at(tripples, 3)
-
-    number_in_english =
-      [
-        billions |> scaled("billion"),
-        millions |> scaled("million"),
-        tausands |> scaled("thousand"),
-        hundreds |> scaled(nil)
-      ]
-      |> Enum.reject(&is_nil/1)
-      |> Enum.join(" ")
-
-    {:ok, number_in_english}
+    words = number |> tripples() |> Enum.map(&tripple_in_english/1) |> Enum.zip([nil, "thousand", "million", "billion"]) |> Enum.reverse() |> Enum.map(&scaled/1) |> Enum.reject(&is_nil/1) |> Enum.join(" ")
+    {:ok, words}
   end
 
-  defp scaled(nil, _), do: nil
-  defp scaled([], _), do: nil
-  defp scaled("", _), do: nil
-  defp scaled(number, nil), do: "#{number}"
-  defp scaled(number, ""), do: "#{number}"
-  defp scaled(number, word), do: "#{number} #{word}"
+  defp scaled({nil, _}), do: nil
+  defp scaled({[], _}), do: nil
+  defp scaled({"", _}), do: nil
+  defp scaled({number, nil}), do: "#{number}"
+  defp scaled({number, word}), do: "#{number} #{word}"
 
   defp tripples(number) do
     number
