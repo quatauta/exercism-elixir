@@ -18,6 +18,7 @@ defmodule Say do
       |> Enum.map(&scaled/1)
       |> Enum.reject(&is_nil/1)
       |> Enum.join(" ")
+      |> String.trim()
 
     {:ok, words}
   end
