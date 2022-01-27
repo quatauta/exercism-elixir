@@ -11,7 +11,10 @@ defmodule Say do
   def in_english(number) do
     words =
       number
-      |> reverse_tripples()
+      |> Integer.digits()
+      |> Enum.reverse()
+      |> Enum.chunk_every(3, 3, [nil, nil, nil])
+      |> Enum.map(&Enum.reverse/1)
       |> Enum.map(&tripple_in_english/1)
       |> Enum.zip([nil, "thousand", "million", "billion"])
       |> Enum.reverse()
@@ -28,14 +31,6 @@ defmodule Say do
   defp scaled({"", _}), do: nil
   defp scaled({number, nil}), do: "#{number}"
   defp scaled({number, word}), do: "#{number} #{word}"
-
-  defp reverse_tripples(number) do
-    number
-    |> Integer.digits()
-    |> Enum.reverse()
-    |> Enum.chunk_every(3, 3, [nil, nil, nil])
-    |> Enum.map(&Enum.reverse/1)
-  end
 
   defp tripple_in_english([hundreds, tens, ones]) do
     [hundreds_in_english(hundreds), tens_in_english(tens, ones)]
