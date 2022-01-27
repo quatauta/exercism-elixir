@@ -1,4 +1,6 @@
 defmodule SimpleCipher do
+  @moduledoc false
+
   @doc """
   Given a `plaintext` and `key`, encode each character of the `plaintext` by
   shifting it by the corresponding letter in the alphabet shifted by the number
