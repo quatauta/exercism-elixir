@@ -33,6 +33,8 @@ defmodule SimpleCipher do
   as are necessary.
   """
   def encode(plaintext, key) do
+    k = enlarge_key(key, String.length(plaintext))
+    plaintext |> String.to_charlist() |> rotate(k) |> to_string()
   end
 
   @doc """
@@ -46,6 +48,8 @@ defmodule SimpleCipher do
   etc..., depending on how much you shift the alphabet.
   """
   def decode(ciphertext, key) do
+    k = enlarge_key(key, String.length(ciphertext))
+    ciphertext |> String.to_charlist() |> rotate(k, :backward) |> to_string()
   end
 
   @doc """
@@ -54,5 +58,19 @@ defmodule SimpleCipher do
   @spec generate_key(integer()) :: String.t()
   def generate_key(length) do
     1..length |> Enum.map(fn _ -> ?a + :rand.uniform(26) - 1 end) |> List.to_string()
+  end
+
+  defp rotate(plain, key, direction \\ :forward)
+  defp rotate([], _, _), do: []
+  defp rotate([plain | pt], [key | kt], direction) do
+    p = plain - ?a
+    k = key - ?a
+    n = direction == :forward && p + k || p - k
+    r = ?a + Integer.mod(n, 26)
+    [r | rotate(pt, kt, direction)]
+  end
+
+  defp enlarge_key(key, length) do
+    key |> String.duplicate(trunc(Float.ceil(length / String.length(key)))) |> String.to_charlist()
   end
 end
