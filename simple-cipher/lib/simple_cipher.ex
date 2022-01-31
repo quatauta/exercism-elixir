@@ -32,6 +32,7 @@ defmodule SimpleCipher do
   "abcabca". If the key is longer than the text, only use as many letters of it
   as are necessary.
   """
+  @spec encode(String.t(), String.t()) :: String.t()
   def encode(plaintext, key) do
     k = enlarge_key(key, String.length(plaintext))
     plaintext |> String.to_charlist() |> rotate(k) |> to_string()
