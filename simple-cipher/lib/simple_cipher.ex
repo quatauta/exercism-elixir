@@ -52,5 +52,6 @@ defmodule SimpleCipher do
   Generate a random key of a given length. It should contain lowercase letters only.
   """
   def generate_key(length) do
+    1..length |> Enum.map(fn _ -> ?a + :rand.uniform(26) - 1 end) |> List.to_string()
   end
 end
