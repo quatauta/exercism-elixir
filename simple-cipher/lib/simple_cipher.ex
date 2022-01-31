@@ -57,7 +57,7 @@ defmodule SimpleCipher do
   """
   @spec generate_key(integer()) :: String.t()
   def generate_key(length) do
-    1..length |> Enum.map(fn _ -> ?a + :rand.uniform(26) - 1 end) |> List.to_string()
+    1..length |> Enum.map(fn _ -> Enum.random(?a..?z) end) |> List.to_string()
   end
 
   defp rotate(plaintext, key, direction) when is_binary(plaintext) and is_binary(key) do
