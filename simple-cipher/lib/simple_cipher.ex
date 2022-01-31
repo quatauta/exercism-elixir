@@ -34,8 +34,7 @@ defmodule SimpleCipher do
   """
   @spec encode(String.t(), String.t()) :: String.t()
   def encode(plaintext, key) do
-    k = enlarge_key(key, String.length(plaintext))
-    plaintext |> String.to_charlist() |> rotate(k) |> to_string()
+    rotate(plaintext, key, :forward)
   end
 
   @doc """
@@ -50,8 +49,7 @@ defmodule SimpleCipher do
   """
   @spec decode(String.t(), String.t()) :: String.t()
   def decode(ciphertext, key) do
-    k = enlarge_key(key, String.length(ciphertext))
-    ciphertext |> String.to_charlist() |> rotate(k, :backward) |> to_string()
+    rotate(ciphertext, key, :backward)
   end
 
   @doc """
@@ -62,17 +60,19 @@ defmodule SimpleCipher do
     1..length |> Enum.map(fn _ -> ?a + :rand.uniform(26) - 1 end) |> List.to_string()
   end
 
-  defp rotate(plain, key, direction \\ :forward)
-  defp rotate([], _, _), do: []
-  defp rotate([plain | pt], [key | kt], direction) do
-    p = plain - ?a
-    k = key - ?a
-    n = direction == :forward && p + k || p - k
-    r = ?a + Integer.mod(n, 26)
-    [r | rotate(pt, kt, direction)]
+  defp rotate(plaintext, key, direction) when is_binary(plaintext) and is_binary(key) do
+    key_stream = Stream.cycle(String.to_charlist(key))
+
+    plaintext
+    |> String.to_charlist()
+    |> Enum.zip_reduce(key_stream, [], &(&3 ++ [rotate(&1, &2, direction)]))
+    |> to_string()
   end
 
-  defp enlarge_key(key, length) do
-    key |> String.duplicate(trunc(Float.ceil(length / String.length(key)))) |> String.to_charlist()
+  defp rotate(plain_char, key_char, direction) do
+    p = plain_char - ?a
+    k = key_char - ?a
+    n = (direction == :forward && p + k) || p - k
+    ?a + Integer.mod(n, 26)
   end
 end
