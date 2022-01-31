@@ -48,6 +48,7 @@ defmodule SimpleCipher do
   but you will go the opposite way, so "d" becomes "a", "w" becomes "t",
   etc..., depending on how much you shift the alphabet.
   """
+  @spec decode(String.t(), String.t()) :: String.t()
   def decode(ciphertext, key) do
     k = enlarge_key(key, String.length(ciphertext))
     ciphertext |> String.to_charlist() |> rotate(k, :backward) |> to_string()
