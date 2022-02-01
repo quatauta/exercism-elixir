@@ -1,4 +1,6 @@
 defmodule Allergies do
+  @moduledoc false
+
   @doc """
   List the allergies for which the corresponding flag bit is true.
   """
