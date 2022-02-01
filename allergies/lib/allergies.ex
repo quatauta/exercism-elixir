@@ -1,6 +1,17 @@
 defmodule Allergies do
   @moduledoc false
 
+  @allergies %{
+    1 => "eggs",
+    2 => "peanuts",
+    4 => "shellfish",
+    8 => "strawberries",
+    16 => "tomatoes",
+    32 => "chocolate",
+    64 => "pollen",
+    128 => "cats"
+  }
+
   @doc """
   List the allergies for which the corresponding flag bit is true.
   """
