@@ -61,6 +61,7 @@ experiment make the code better? Worse? Did you learn anything from it?
 - @devonestes
 - @drueck
 - @elasticdog
+- @jiegillet
 - @jinyeow
 - @kytrinyx
 - @lpil
