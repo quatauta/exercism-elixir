@@ -1,2 +1,2 @@
 ExUnit.start()
-ExUnit.configure(formatters: [JUnitFormatter, ExUnit.CLIFormatter])
+ExUnit.configure(exclude: :pending, trace: true)
