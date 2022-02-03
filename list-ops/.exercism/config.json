@@ -1,0 +1,32 @@
+{
+  "blurb": "Implement basic list operations.",
+  "authors": [],
+  "contributors": [
+    "andrewsardone",
+    "angelikatyborska",
+    "Cohen-Carlisle",
+    "dalexj",
+    "devonestes",
+    "henrik",
+    "jinyeow",
+    "kytrinyx",
+    "lpil",
+    "neenjaw",
+    "parkerl",
+    "rubysolo",
+    "sotojuan",
+    "Teapane",
+    "waiting-for-dev"
+  ],
+  "files": {
+    "solution": [
+      "lib/list_ops.ex"
+    ],
+    "test": [
+      "test/list_ops_test.exs"
+    ],
+    "example": [
+      ".meta/example.ex"
+    ]
+  }
+}
