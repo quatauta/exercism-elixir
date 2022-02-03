@@ -10,41 +10,39 @@ defmodule ListOps do
 
   @spec count(list) :: non_neg_integer
   def count([]), do: 0
-  def count([_ | tail]), do: 1 + count(tail)
+  def count([_head | tail]), do: 1 + count(tail)
 
   @spec reverse(list) :: list
-  def reverse(l), do: reverse(l, [])
-  defp reverse([], reversed), do: reversed
-  defp reverse([head | tail], reversed), do: reverse(tail, [head | reversed])
+  def reverse(l), do: do_reverse({l, []})
+
+  defp do_reverse({[], rev_list}), do: rev_list
+
+  defp do_reverse({[h | t], rl}), do: do_reverse({t, [h | rl]})
 
   @spec map(list, (any -> any)) :: list
   def map([], _), do: []
-  def map([head | tail], f), do: [f.(head) | map(tail, f)]
+
+  def map([h | t], f), do: [f.(h) | map(t, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter([], _), do: []
 
-  def filter([head | tail], f) do
-    if f.(head) do
-      [head | filter(tail, f)]
-    else
-      filter(tail, f)
-    end
-  end
+  def filter([h | t], f), do: if(f.(h), do: [h | filter(t, f)], else: filter(t, f))
 
   @type acc :: any
-  @spec reduce(list, acc, (any, acc -> acc)) :: acc
-  def reduce([], acc, _), do: acc
-  def reduce([head | tail], acc, f), do: reduce(tail, f.(head, acc), f)
+  @spec foldl(list, acc, (any, acc -> acc)) :: acc
+  def foldl([], acc, _), do: acc
+
+  def foldl([h | t], acc, f), do: foldl(t, f.(h, acc), f)
+
+  @spec foldr(list, acc, (any, acc -> acc)) :: acc
+  def foldr(l, acc, f), do: foldl(reverse(l), acc, f)
 
   @spec append(list, list) :: list
-  def append([], []), do: []
   def append([], b), do: b
-  def append(a, []), do: a
-  def append([a_head | a_tail], b), do: [a_head | append(a_tail, b)]
+
+  def append([h | t], b), do: [h | append(t, b)]
 
   @spec concat([[any]]) :: [any]
-  def concat([]), do: []
-  def concat([[] | more]), do: concat(more)
-  def concat([[head | tail] | more]), do: [head | concat([tail | more])]
+  def concat(ll), do: foldr(ll, [], &append/2)
 end

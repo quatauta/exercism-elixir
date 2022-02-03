@@ -1,42 +1,36 @@
 {
-  "blurb": "Given students' names along with the grade that they are in, create a roster for the school.",
+  "blurb": "Given an age in seconds, calculate how old someone is in terms of a given planet's solar years.",
   "authors": [
     "rubysolo"
   ],
   "contributors": [
-    "andrewsardone",
     "angelikatyborska",
-    "bartj3",
     "Cohen-Carlisle",
     "dalexj",
     "devonestes",
-    "drueck",
-    "elasticdog",
-    "jiegillet",
+    "henrik",
     "jinyeow",
+    "koriroys",
     "kytrinyx",
     "lpil",
     "neenjaw",
     "parkerl",
-    "petehuang",
     "pminten",
     "sotojuan",
     "Teapane",
-    "veelenga",
-    "victorlcampos",
     "waiting-for-dev"
   ],
   "files": {
     "solution": [
-      "lib/school.ex"
+      "lib/space_age.ex"
     ],
     "test": [
-      "test/school_test.exs"
+      "test/space_age_test.exs"
     ],
     "example": [
       ".meta/example.ex"
     ]
   },
-  "source": "A pairing session with Phil Battos at gSchool",
-  "source_url": "http://gschool.it"
+  "source": "Partially inspired by Chapter 1 in Chris Pine's online Learn to Program tutorial.",
+  "source_url": "http://pine.fm/LearnToProgram/?Chapter=01"
 }

@@ -1,58 +1,79 @@
-defmodule SpageAgeTest do
+defmodule SpaceAgeTest do
   use ExUnit.Case
 
   # @tag :pending
   test "age on Earth" do
     input = 1_000_000_000
-    assert_in_delta 31.69, SpaceAge.age_on(:earth, input), 0.005
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 31.69, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Mercury" do
     input = 2_134_835_688
-    assert_in_delta 67.65, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 280.88, SpaceAge.age_on(:mercury, input), 0.005
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 67.65, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:mercury, input)
+    assert_in_delta 280.88, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Venus" do
     input = 189_839_836
-    assert_in_delta 6.02, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 9.78, SpaceAge.age_on(:venus, input), 0.005
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 6.02, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:venus, input)
+    assert_in_delta 9.78, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Mars" do
-    input = 2_329_871_239
-    assert_in_delta 73.83, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 39.25, SpaceAge.age_on(:mars, input), 0.005
+    input = 2_129_871_239
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 67.49, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:mars, input)
+    assert_in_delta 35.88, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Jupiter" do
     input = 901_876_382
-    assert_in_delta 28.58, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 2.41, SpaceAge.age_on(:jupiter, input), 0.005
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 28.58, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:jupiter, input)
+    assert_in_delta 2.41, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Saturn" do
-    input = 3_000_000_000
-    assert_in_delta 95.06, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 3.23, SpaceAge.age_on(:saturn, input), 0.005
+    input = 2_000_000_000
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 63.38, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:saturn, input)
+    assert_in_delta 2.15, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Uranus" do
-    input = 3_210_123_456
-    assert_in_delta 101.72, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 1.21, SpaceAge.age_on(:uranus, input), 0.005
+    input = 1_210_123_456
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 38.35, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:uranus, input)
+    assert_in_delta 0.46, age, 0.005
   end
 
-  # @tag :pending
+  @tag :pending
   test "age on Neptune" do
-    input = 8_210_123_456
-    assert_in_delta 260.16, SpaceAge.age_on(:earth, input), 0.005
-    assert_in_delta 1.58, SpaceAge.age_on(:neptune, input), 0.005
+    input = 1_821_023_456
+    {:ok, age} = SpaceAge.age_on(:earth, input)
+    assert_in_delta 57.70, age, 0.005
+    {:ok, age} = SpaceAge.age_on(:neptune, input)
+    assert_in_delta 0.35, age, 0.005
+  end
+
+  @tag :pending
+  test "invalid planet causes error" do
+    input = 680_804_807
+    assert SpaceAge.age_on(:sun, input) == {:error, "not a planet"}
   end
 end
