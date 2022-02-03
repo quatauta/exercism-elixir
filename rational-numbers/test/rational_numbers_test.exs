@@ -200,53 +200,39 @@ defmodule RationalNumbersTest do
   end
 
   describe "Reduction to lowest terms" do
-    # @tag :pending
+    @tag :pending
     test "Reduce a positive rational number to lowest terms" do
-      r = {2, 4}
-      result = {1, 2}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({2, 4}) == {1, 2}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce places the minus sign on the numerator" do
-      r = {3, -4}
-      result = {-3, 4}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({3, -4}) == {-3, 4}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce a negative rational number to lowest terms" do
-      r = {-4, 6}
-      result = {-2, 3}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({-4, 6}) == {-2, 3}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce a rational number with a negative denominator to lowest terms" do
-      r = {3, -9}
-      result = {-1, 3}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({3, -9}) == {-1, 3}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce zero to lowest terms" do
-      r = {0, 6}
-      result = {0, 1}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({0, 6}) == {0, 1}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce an integer to lowest terms" do
-      r = {-14, 7}
-      result = {-2, 1}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({-14, 7}) == {-2, 1}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Reduce one to lowest terms" do
-      r = {13, 13}
-      result = {1, 1}
-      assert RationalNumbers.reduce(r) == result
+      assert RationalNumbers.reduce({13, 13}) == {1, 1}
     end
   end
 end
