@@ -38,8 +38,8 @@ defmodule FlattenArrayTest do
   end
 
   @tag :pending
-  test "removes nil from list" do
-    assert FlattenArray.flatten([1, nil, 2]) ==
+  test "nil values values are omitted from the final result" do
+    assert FlattenArray.flatten([1, 2, nil]) ==
              [1, 2]
   end
 
