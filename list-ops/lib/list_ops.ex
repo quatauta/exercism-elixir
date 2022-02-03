@@ -20,18 +20,18 @@ defmodule ListOps do
   defp do_reverse({[h | t], rl}), do: do_reverse({t, [h | rl]})
 
   @spec map(list, (any -> any)) :: list
-  def map([], _f), do: []
+  def map([], _), do: []
 
   def map([h | t], f), do: [f.(h) | map(t, f)]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter([], _f), do: []
+  def filter([], _), do: []
 
   def filter([h | t], f), do: if(f.(h), do: [h | filter(t, f)], else: filter(t, f))
 
   @type acc :: any
   @spec foldl(list, acc, (any, acc -> acc)) :: acc
-  def foldl([], acc, _f), do: acc
+  def foldl([], acc, _), do: acc
 
   def foldl([h | t], acc, f), do: foldl(t, f.(h, acc), f)
 
@@ -39,9 +39,9 @@ defmodule ListOps do
   def foldr(l, acc, f), do: foldl(reverse(l), acc, f)
 
   @spec append(list, list) :: list
-  def append(_a = [], b), do: b
+  def append([], b), do: b
 
-  def append(_a = [h | t], b), do: [h | append(t, b)]
+  def append([h | t], b), do: [h | append(t, b)]
 
   @spec concat([[any]]) :: [any]
   def concat(ll), do: foldr(ll, [], &append/2)
