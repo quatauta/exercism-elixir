@@ -1,5 +1,6 @@
 defmodule Allergies do
   @moduledoc false
+  use Bitwise
 
   @allergies %{
     1 => "eggs",
@@ -17,6 +18,13 @@ defmodule Allergies do
   """
   @spec list(non_neg_integer) :: [String.t()]
   def list(flags) do
+    Enum.reduce(@allergies, [], fn {flag, allergy}, acc ->
+      if Bitwise.band(flags, flag) == flag do
+        [allergy | acc]
+      else
+        acc
+      end
+    end)
   end
 
   @doc """
@@ -24,5 +32,6 @@ defmodule Allergies do
   """
   @spec allergic_to?(non_neg_integer, String.t()) :: boolean
   def allergic_to?(flags, item) do
+    flags |> list() |> Enum.any?(&(&1 == item))
   end
 end
