@@ -4,273 +4,172 @@ defmodule RationalNumbersTest do
   describe "Addition" do
     # @tag :pending
     test "Add two positive rational numbers" do
-      r1 = {1, 2}
-      r2 = {2, 3}
-      result = {7, 6}
-      assert RationalNumbers.add(r1, r2) == result
+      assert RationalNumbers.add({1, 2}, {2, 3}) == {7, 6}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Add a positive rational number and a negative rational number" do
-      r1 = {1, 2}
-      r2 = {-2, 3}
-      result = {-1, 6}
-      assert RationalNumbers.add(r1, r2) == result
+      assert RationalNumbers.add({1, 2}, {-2, 3}) == {-1, 6}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Add two negative rational numbers" do
-      r1 = {-1, 2}
-      r2 = {-2, 3}
-      result = {-7, 6}
-      assert RationalNumbers.add(r1, r2) == result
+      assert RationalNumbers.add({-1, 2}, {-2, 3}) == {-7, 6}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Add a rational number to its additive inverse" do
-      r1 = {1, 2}
-      r2 = {-1, 2}
-      result = {0, 1}
-      assert RationalNumbers.add(r1, r2) == result
+      assert RationalNumbers.add({1, 2}, {-1, 2}) == {0, 1}
     end
   end
 
   describe "Subtraction" do
     @tag :pending
     test "Subtract two positive rational numbers" do
-      r1 = {1, 2}
-      r2 = {2, 3}
-      result = {-1, 6}
-      assert RationalNumbers.subtract(r1, r2) == result
+      assert RationalNumbers.subtract({1, 2}, {2, 3}) == {-1, 6}
     end
 
     @tag :pending
     test "Subtract a positive rational number and a negative rational number" do
-      r1 = {1, 2}
-      r2 = {-2, 3}
-      result = {7, 6}
-      assert RationalNumbers.subtract(r1, r2) == result
+      assert RationalNumbers.subtract({1, 2}, {-2, 3}) == {7, 6}
     end
 
     @tag :pending
     test "Subtract two negative rational numbers" do
-      r1 = {-1, 2}
-      r2 = {-2, 3}
-      result = {1, 6}
-      assert RationalNumbers.subtract(r1, r2) == result
+      assert RationalNumbers.subtract({-1, 2}, {-2, 3}) == {1, 6}
     end
 
     @tag :pending
     test "Subtract a rational number from itself" do
-      r1 = {1, 2}
-      r2 = {1, 2}
-      result = {0, 1}
-      assert RationalNumbers.subtract(r1, r2) == result
+      assert RationalNumbers.subtract({1, 2}, {1, 2}) == {0, 1}
     end
   end
 
   describe "Multiplication" do
     @tag :pending
     test "Multiply two positive rational numbers" do
-      r1 = {1, 2}
-      r2 = {2, 3}
-      result = {1, 3}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({1, 2}, {2, 3}) == {1, 3}
     end
 
     @tag :pending
     test "Multiply a negative rational number by a positive rational number" do
-      r1 = {-1, 2}
-      r2 = {2, 3}
-      result = {-1, 3}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({-1, 2}, {2, 3}) == {-1, 3}
     end
 
     @tag :pending
     test "Multiply two negative rational numbers" do
-      r1 = {-1, 2}
-      r2 = {-2, 3}
-      result = {1, 3}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({-1, 2}, {-2, 3}) == {1, 3}
     end
 
     @tag :pending
     test "Multiply a rational number by its reciprocal" do
-      r1 = {1, 2}
-      r2 = {2, 1}
-      result = {1, 1}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({1, 2}, {2, 1}) == {1, 1}
     end
 
     @tag :pending
     test "Multiply a rational number by 1" do
-      r1 = {1, 2}
-      r2 = {1, 1}
-      result = {1, 2}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({1, 2}, {1, 1}) == {1, 2}
     end
 
     @tag :pending
     test "Multiply a rational number by 0" do
-      r1 = {1, 2}
-      r2 = {0, 1}
-      result = {0, 1}
-      assert RationalNumbers.multiply(r1, r2) == result
+      assert RationalNumbers.multiply({1, 2}, {0, 1}) == {0, 1}
     end
   end
 
   describe "Division" do
     @tag :pending
     test "Divide two positive rational numbers" do
-      r1 = {1, 2}
-      r2 = {2, 3}
-      result = {3, 4}
-      assert RationalNumbers.divide_by(r1, r2) == result
+      assert RationalNumbers.divide_by({1, 2}, {2, 3}) == {3, 4}
     end
 
     @tag :pending
     test "Divide a positive rational number by a negative rational number" do
-      r1 = {1, 2}
-      r2 = {-2, 3}
-      result = {-3, 4}
-      assert RationalNumbers.divide_by(r1, r2) == result
+      assert RationalNumbers.divide_by({1, 2}, {-2, 3}) == {-3, 4}
     end
 
     @tag :pending
     test "Divide two negative rational numbers" do
-      r1 = {-1, 2}
-      r2 = {-2, 3}
-      result = {3, 4}
-      assert RationalNumbers.divide_by(r1, r2) == result
+      assert RationalNumbers.divide_by({-1, 2}, {-2, 3}) == {3, 4}
     end
 
     @tag :pending
     test "Divide a rational number by 1" do
-      r1 = {1, 2}
-      r2 = {1, 1}
-      result = {1, 2}
-      assert RationalNumbers.divide_by(r1, r2) == result
+      assert RationalNumbers.divide_by({1, 2}, {1, 1}) == {1, 2}
     end
   end
 
   describe "Absolute value" do
-    # @tag :pending
+    @tag :pending
     test "Absolute value of a positive rational number" do
-      r = {1, 2}
-      result = {1, 2}
-      assert RationalNumbers.abs(r) == result
+      assert RationalNumbers.abs({1, 2}) == {1, 2}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Absolute value of a positive rational number with negative numerator and denominator" do
-      r = {-1, -2}
-      result = {1, 2}
-      assert RationalNumbers.abs(r) == result
+      assert RationalNumbers.abs({-1, -2}) == {1, 2}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Absolute value of a negative rational number" do
-      r = {-1, 2}
-      result = {1, 2}
-      assert RationalNumbers.abs(r) == result
+      assert RationalNumbers.abs({-1, 2}) == {1, 2}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Absolute value of a negative rational number with negative denominator" do
-      r = {1, -2}
-      result = {1, 2}
-      assert RationalNumbers.abs(r) == result
+      assert RationalNumbers.abs({1, -2}) == {1, 2}
     end
 
-    # @tag :pending
+    @tag :pending
     test "Absolute value of zero" do
-      r = {0, 1}
-      result = {0, 1}
-      assert RationalNumbers.abs(r) == result
+      assert RationalNumbers.abs({0, 1}) == {0, 1}
     end
   end
 
   describe "Exponentiation of a rational number" do
     @tag :pending
     test "Raise a positive rational number to a positive integer power" do
-      r = {1, 2}
-      n = 3
-      result = {1, 8}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({1, 2}, 3) == {1, 8}
     end
 
     @tag :pending
     test "Raise a negative rational number to a positive integer power" do
-      r = {-1, 2}
-      n = 3
-      result = {-1, 8}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({-1, 2}, 3) == {-1, 8}
+    end
+
+    @tag :pending
+    test "Raise a positive rational number to a negative integer power" do
+      assert RationalNumbers.pow_rational({3, 5}, -2) == {25, 9}
+    end
+
+    @tag :pending
+    test "Raise a negative rational number to an even negative integer power" do
+      assert RationalNumbers.pow_rational({-3, 5}, -2) == {25, 9}
+    end
+
+    @tag :pending
+    test "Raise a negative rational number to an odd negative integer power" do
+      assert RationalNumbers.pow_rational({-3, 5}, -3) == {-125, 27}
     end
 
     @tag :pending
     test "Raise zero to an integer power" do
-      r = {0, 1}
-      n = 5
-      result = {0, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({0, 1}, 5) == {0, 1}
     end
 
     @tag :pending
     test "Raise one to an integer power" do
-      r = {1, 1}
-      n = 4
-      result = {1, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({1, 1}, 4) == {1, 1}
     end
 
     @tag :pending
     test "Raise a positive rational number to the power of zero" do
-      r = {1, 2}
-      n = 0
-      result = {1, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({1, 2}, 0) == {1, 1}
     end
 
     @tag :pending
     test "Raise a negative rational number to the power of zero" do
-      r = {-1, 2}
-      n = 0
-      result = {1, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
-    end
-  end
-
-  describe "Exponentiation of a rational number by a negative integer" do
-    @tag :pending
-    test "Raise a positive rational number to a negative integer power" do
-      r = {1, 2}
-      n = -3
-      result = {8, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
-    end
-
-    @tag :pending
-    test "Raise a negative rational number to a negative integer power" do
-      r = {-1, 2}
-      n = -3
-      result = {-8, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
-    end
-
-    @tag :pending
-    test "Raise zero to an negative integer power" do
-      r = {0, 1}
-      n = -5
-      result = {1, 0}
-      assert RationalNumbers.pow_rational(r, n) == result
-    end
-
-    @tag :pending
-    test "Raise one to an negative integer power" do
-      r = {1, 1}
-      n = -4
-      result = {1, 1}
-      assert RationalNumbers.pow_rational(r, n) == result
+      assert RationalNumbers.pow_rational({-1, 2}, 0) == {1, 1}
     end
   end
 
