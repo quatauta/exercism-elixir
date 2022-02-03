@@ -4,36 +4,33 @@ defmodule School do
 
   Each student is in a grade.
   """
+  @type school :: list()
+  @doc """
+  Create a new, empty school.
+  """
+  @spec new() :: school()
+  def new(), do: []
 
   @doc """
   Add a student to a particular grade in school.
   """
-  @spec add(map, String.t(), integer) :: map
-  def add(db, name, grade) do
-    if exists?(db, name) do
-      db
-    else
-      Map.update(db, grade, [name], fn list -> [name | list] |> Enum.uniq() |> Enum.sort() end)
-    end
-  end
-
-  defp exists?(db, name) do
-    db |> Map.values() |> Enum.any?(&Enum.member?(&1, name))
+  @spec add(school(), String.t(), integer()) :: {:ok | :error, school()}
+  def add(school, name, grade) do
+    if name in roster(school),
+      do: {:error, school},
+      else: {:ok, [%{name: name, grade: grade} | school]}
   end
 
   @doc """
-  Return the names of the students in a particular grade.
+  Return the names of the students in a particular grade, sorted alphabetically.
   """
-  @spec grade(map, integer) :: [String.t()]
-  def grade(db, grade) do
-    db[grade] || []
-  end
+  @spec grade(school(), integer()) :: [String.t()]
+  def grade(school, grade),
+    do: school |> Enum.filter(fn student -> student.grade == grade end) |> roster()
 
   @doc """
-  Sorts the school by grade and name.
+  Return the names of all the students in the school sorted by grade and name.
   """
-  @spec sort(map) :: [{integer, [String.t()]}]
-  def sort(db) do
-    db |> Map.to_list() |> List.keysort(0)
-  end
+  @spec roster(school()) :: [String.t()]
+  def roster(school), do: school |> Enum.sort_by(&{&1.grade, &1.name}) |> Enum.map(& &1.name)
 end
