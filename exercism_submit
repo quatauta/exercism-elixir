@@ -1,0 +1,4 @@
+#! /usr/bin/env elixir
+
+Path.wildcard("*/lib/*.ex")
+|> Enum.each(&(System.cmd("exercism", ["submit", &1])))
