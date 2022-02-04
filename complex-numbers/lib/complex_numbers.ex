@@ -33,14 +33,16 @@ defmodule ComplexNumbers do
   Add two complex numbers, or a real and a complex number
   """
   @spec add(a :: complex | float, b :: complex | float) :: complex
-  def add(a, b) do
+  def add({r1, i1}, {r2, i2}) do
+    {r1 + r2, i1 + i2}
   end
 
   @doc """
   Subtract two complex numbers, or a real and a complex number
   """
   @spec sub(a :: complex | float, b :: complex | float) :: complex
-  def sub(a, b) do
+  def sub({r1, i1}, {r2, i2}) do
+    {r1 - r2, i1 - i2}
   end
 
   @doc """
