@@ -13,15 +13,13 @@ defmodule ComplexNumbers do
   Return the real part of a complex number
   """
   @spec real(a :: complex) :: float
-  def real(a) do
-  end
+  def real({r, _}), do: r
 
   @doc """
   Return the imaginary part of a complex number
   """
   @spec imaginary(a :: complex) :: float
-  def imaginary(a) do
-  end
+  def imaginary({_, i}), do: i
 
   @doc """
   Multiply two complex numbers, or a real and a complex number
