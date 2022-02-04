@@ -41,7 +41,7 @@ defmodule ComplexNumbers do
   Subtract two complex numbers, or a real and a complex number
   """
   @spec sub(a :: complex | float, b :: complex | float) :: complex
-  def sub({r1, i1}, {r2, i2}), do:  {r1 - r2, i1 - i2}
+  def sub({r1, i1}, {r2, i2}), do: {r1 - r2, i1 - i2}
   def sub(a, {r2, i2}), do: sub({a, 0.0}, {r2, i2})
   def sub({r1, i1}, b), do: sub({r1, i1}, {b, 0.0})
 
@@ -51,9 +51,9 @@ defmodule ComplexNumbers do
   @spec div(a :: complex | float, b :: complex | float) :: complex
   # `(a + i * b) / (c + i * d) = (a * c + b * d)/(c^2 + d^2) + (b * c - a * d)/(c^2 + d^2) * i`.
   def div({r1, i1}, {r2, i2}) do
-    { (r1 * r2 + i1 * i2) / (r2 ** 2 + i2 ** 2),
-      (i1 * r2 - r1 * i2) / (r2 ** 2 + i2 ** 2) }
+    {(r1 * r2 + i1 * i2) / (r2 ** 2 + i2 ** 2), (i1 * r2 - r1 * i2) / (r2 ** 2 + i2 ** 2)}
   end
+
   def div(a, {r2, i2}), do: __MODULE__.div({a, 0.0}, {r2, i2})
   def div({r1, i1}, b), do: __MODULE__.div({r1, i1}, {b, 0.0})
 
