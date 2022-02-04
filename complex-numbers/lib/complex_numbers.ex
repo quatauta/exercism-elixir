@@ -1,4 +1,6 @@
 defmodule ComplexNumbers do
+  @moduledoc false
+
   @typedoc """
   In this module, complex numbers are represented as a tuple-pair containing the real and
   imaginary parts.
