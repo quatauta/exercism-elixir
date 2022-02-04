@@ -25,7 +25,8 @@ defmodule ComplexNumbers do
   Multiply two complex numbers, or a real and a complex number
   """
   @spec mul(a :: complex | float, b :: complex | float) :: complex
-  def mul(a, b) do
+  def mul({r1, i1}, {r2, i2}) do
+    {r1 * r2 - i1 * i2, i2 * r2 + r1 * i2}
   end
 
   @doc """
