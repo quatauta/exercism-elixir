@@ -23,7 +23,7 @@
         #
         included: [
           "**/lib/",
-          "**/src/",
+          "**/src/"
         ],
         excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/"]
       },
