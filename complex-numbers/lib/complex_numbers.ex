@@ -49,7 +49,6 @@ defmodule ComplexNumbers do
   Divide two complex numbers, or a real and a complex number
   """
   @spec div(a :: complex | float, b :: complex | float) :: complex
-  # `(a + i * b) / (c + i * d) = (a * c + b * d)/(c^2 + d^2) + (b * c - a * d)/(c^2 + d^2) * i`.
   def div({r1, i1}, {r2, i2}) do
     r_d = (r1 * r2 + i1 * i2) / (r2 ** 2 + i2 ** 2)
     i_d = (i1 * r2 - r1 * i2) / (r2 ** 2 + i2 ** 2)
@@ -64,7 +63,7 @@ defmodule ComplexNumbers do
   """
   @spec abs(a :: complex) :: float
   def abs({r, i}) do
-    Kernel.abs(:math.sqrt(r**2 + i**2))
+    Kernel.abs(:math.sqrt(r ** 2 + i ** 2))
   end
 
   @doc """
