@@ -70,7 +70,8 @@ defmodule ComplexNumbers do
   Conjugate of a complex number
   """
   @spec conjugate(a :: complex) :: complex
-  def conjugate(a) do
+  def conjugate({r, i}) do
+    {r, i * -1}
   end
 
   @doc """
