@@ -63,7 +63,8 @@ defmodule ComplexNumbers do
   Absolute value of a complex number
   """
   @spec abs(a :: complex) :: float
-  def abs(a) do
+  def abs({r, i}) do
+    Kernel.abs(:math.sqrt(r**2 + i**2))
   end
 
   @doc """
