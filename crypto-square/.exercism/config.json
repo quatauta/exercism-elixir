@@ -1,0 +1,31 @@
+{
+  "blurb": "Implement the classic method for composing secret messages called a square code.",
+  "authors": [
+    "jimmbraddock"
+  ],
+  "contributors": [
+    "amencarini",
+    "angelikatyborska",
+    "Cohen-Carlisle",
+    "devonestes",
+    "ggpasqualino",
+    "lpil",
+    "neenjaw",
+    "parkerl",
+    "sotojuan",
+    "waiting-for-dev"
+  ],
+  "files": {
+    "solution": [
+      "lib/crypto_square.ex"
+    ],
+    "test": [
+      "test/crypto_square_test.exs"
+    ],
+    "example": [
+      ".meta/example.ex"
+    ]
+  },
+  "source": "J Dalbey's Programming Practice problems",
+  "source_url": "http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html"
+}
