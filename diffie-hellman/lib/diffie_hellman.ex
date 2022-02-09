@@ -36,6 +36,7 @@ defmodule DiffieHellman do
   """
   @spec generate_private_key(prime_p :: integer) :: integer
   def generate_private_key(prime_p) do
+    :rand.uniform(prime_p - 1)
   end
 
   @doc """
