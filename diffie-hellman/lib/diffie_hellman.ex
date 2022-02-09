@@ -48,6 +48,7 @@ defmodule DiffieHellman do
   @spec generate_public_key(prime_p :: integer, prime_g :: integer, private_key :: integer) ::
           integer
   def generate_public_key(prime_p, prime_g, private_key) do
+    Integer.mod(prime_g ** private_key, prime_p)
   end
 
   @doc """
