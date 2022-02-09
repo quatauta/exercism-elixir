@@ -8,6 +8,7 @@ defmodule Squares do
   """
   @spec sum_of_squares(pos_integer) :: pos_integer
   def sum_of_squares(number) do
+    trunc(number * (number + 1) * (2 * number + 1) / 6)
   end
 
   @doc """
