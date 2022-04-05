@@ -17,7 +17,9 @@ test:
       - .cache
   artifacts:
     reports:
-      cobertura: coverage.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
       junit: .cache/_build/test/lib/excercism_elixir/test-junit-report.xml
   coverage: '/^ *Line total: +(\d+\.\d+%) *$/'
   interruptible: true
