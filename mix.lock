@@ -1,5 +1,5 @@
 %{
-  "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm", "7af5c7e09fe1d40f76c8e4f9dd2be7cebd83909f31fee7cd0e9eadc567da8353"},
+  "bunt": {:hex, :bunt, "0.2.1", "e2d4792f7bc0ced7583ab54922808919518d0e57ee162901a16a1b6664ef3b14", [:mix], [], "hexpm", "a330bfb4245239787b15005e66ae6845c9cd524a288f0d141c148b02603777a5"},
   "certifi": {:hex, :certifi, "2.8.0", "d4fb0a6bb20b7c9c3643e22507e42f356ac090a1dcea9ab99e27e0376d695eba", [:rebar3], [], "hexpm", "6ac7efc1c6f8600b08d625292d4bbf584e14847ce1b6b5c44d983d273e1097ea"},
   "cobertura_cover": {:hex, :cobertura_cover, "0.9.0", "01b9c5d2688d68240c1394c931383f8b29105b894ae499ef48aefd082a8a42b3", [:mix], [], "hexpm", "870bc4658cacc5c80d13f1206b688925234d2dc4e00278e8a3e72fbbd6bea0b1"},
   "covertool": {:hex, :covertool, "2.0.4", "54acff6cddd88d28dea663cd2e1fe20dd32fcf5f5d3aff7d59031ce44ce39efa", [:rebar3], [], "hexpm", "5c9568ba4308fda2082172737c80c31d991ea83961eb10791f06106a870d0cdc"},
