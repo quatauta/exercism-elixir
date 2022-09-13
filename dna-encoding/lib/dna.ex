@@ -26,5 +26,5 @@ defmodule DNA do
 
   @spec decode(bitstring) :: dna_charlist()
   def decode(<<>>), do: []
-  def decode(<<head::4, rest::bitstring()>>), do: [decode_nucleotide(head) | decode(rest)]
+  def decode(<<head::4, rest::bitstring>>), do: [decode_nucleotide(head) | decode(rest)]
 end
