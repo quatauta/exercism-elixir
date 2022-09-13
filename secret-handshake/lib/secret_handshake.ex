@@ -1,4 +1,4 @@
-use Bitwise
+import Bitwise
 
 defmodule SecretHandshake do
   @moduledoc """

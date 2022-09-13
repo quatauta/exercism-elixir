@@ -1,7 +1,7 @@
 defmodule Secrets do
   @moduledoc false
 
-  use Bitwise
+  import Bitwise
 
   @spec secret_add(number) :: (number -> number)
   def secret_add(secret) do

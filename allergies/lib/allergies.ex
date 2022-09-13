@@ -1,6 +1,5 @@
 defmodule Allergies do
   @moduledoc false
-  use Bitwise
 
   @allergies %{
     1 => "eggs",
