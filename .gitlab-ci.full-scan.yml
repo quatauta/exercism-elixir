@@ -87,12 +87,13 @@ test:
   variables:
     MIX_ENV: test
   script:
-    - apk add bash
+    - apk add bash git
     - source .gitlab/ci.sh
+    - ci_section lint-test-helpers ci_check_test_helpers
     - ci_section setup-hex mix local.hex --force --if-missing
     - ci_section setup-rebar mix local.rebar --force
-    - ci_section setup-deps mix deps.get
-    - ci_section lint-test-helpers ci_check_test_helpers
+    - ci_section setup-deps mix do deps.get, deps.compile
+    - ci_section audit-dependencies mix do hex.audit, deps.audit
     - ci_section test mix test --cover
     - ci_section test-junit-for-gitlab .gitlab/junit-for-gitlab
     - ci_section lint-format mix format --check-formatted

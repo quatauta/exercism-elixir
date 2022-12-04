@@ -29,10 +29,11 @@ defmodule ExercismElixir.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:covertool, "~> 2.0", only: [:test], runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
       {:junit_formatter, "~> 3.3", only: [:test]},
-      {:dialyxir, "~> 1.1", only: [:dev], runtime: false}
+      {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false}
     ]
   end
 end
