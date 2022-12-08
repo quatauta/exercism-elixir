@@ -93,7 +93,7 @@ test:
     - ci_section setup-hex mix local.hex --force --if-missing
     - ci_section setup-rebar mix local.rebar --force
     - ci_section setup-deps mix do deps.get, deps.compile
-    - ci_section audit-dependencies mix do hex.audit, deps.audit
+    - ci_section audit-dependencies mix do hex.audit, deps.audit, deps.unlock --check-unused
     - ci_section test mix test --cover
     - ci_section test-junit-for-gitlab .gitlab/junit-for-gitlab
     - ci_section lint-format mix format --check-formatted
