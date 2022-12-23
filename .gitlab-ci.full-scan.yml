@@ -91,7 +91,7 @@ test:
     - source .gitlab/ci.sh
     - ci_section lint-test-helpers ci_check_test_helpers
     - ci_section setup-hex mix local.hex --force --if-missing
-    - ci_section setup-rebar mix local.rebar --force
+    - ci_section setup-rebar mix local.rebar --force --if-missing
     - ci_section setup-deps mix do deps.get, deps.compile
     - ci_section audit-dependencies mix do hex.audit, deps.audit, deps.unlock --check-unused
     - ci_section test mix test --cover
