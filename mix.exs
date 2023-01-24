@@ -13,7 +13,8 @@ defmodule ExercismElixir.MixProject do
       deps_path: ".cache/deps",
       elixirc_paths: Path.wildcard("*/lib"),
       test_coverage: [output: ".cache/cover", summary: true, tool: :covertool],
-      test_paths: Path.wildcard("*/test")
+      test_paths: Path.wildcard("*/test"),
+      aliases: aliases()
     ]
   end
 
@@ -34,6 +35,18 @@ defmodule ExercismElixir.MixProject do
       {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
       {:junit_formatter, "~> 3.3", only: [:test]},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      setup: [
+        "local.hex --force --if-missing",
+        "local.rebar --force --if-missing",
+        "deps.get",
+        "deps.compile"
+      ],
+      audit: ["hex.audit", "deps.audit", "deps.unlock --check-unused"],
     ]
   end
 end
